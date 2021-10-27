@@ -1,5 +1,6 @@
 package com.b1nd.dgit.domain.entities;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -23,4 +24,10 @@ public class TotalTop {
 
   @Column(name = "date", nullable = false)
   private Date date;
+
+  @Builder
+  public TotalTop (User user, Date date) {
+    this.user = user;
+    this.date = date;
+  }
 }

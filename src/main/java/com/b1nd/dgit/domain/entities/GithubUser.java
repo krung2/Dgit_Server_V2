@@ -1,5 +1,6 @@
 package com.b1nd.dgit.domain.entities;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -28,4 +29,20 @@ public class GithubUser extends BaseEntity {
 
   @Column(name = "bio", nullable = true)
   private String bio;
+
+  @Builder
+  public GithubUser(User user, Long totalContributions, String userImage, String bio){
+    this.user = user;
+    this.totalContributions = totalContributions;
+    this.userImage = userImage;
+    this.bio = bio;
+  }
+
+  public GithubUser update(Long totalContributions, String userImage, String bio){
+    this.totalContributions = totalContributions;
+    this.userImage = userImage;
+    this.bio = bio;
+
+    return this;
+  }
 }

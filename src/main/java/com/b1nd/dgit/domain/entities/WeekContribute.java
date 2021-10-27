@@ -1,6 +1,7 @@
 package com.b1nd.dgit.domain.entities;
 
 import com.b1nd.dgit.enums.week.WeekDay;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -29,6 +30,13 @@ public class WeekContribute {
   private Date date;
 
   @Column(name = "weekday", nullable = false)
-  private WeekDay weekContribute;
+  private WeekDay weekDay;
 
+  @Builder
+  public WeekContribute (User user, Long contribute, Date date, WeekDay weekDay) {
+    this.user = user;
+    this.contribute = contribute;
+    this.date = date;
+    this.weekDay = weekDay;
+  }
 }

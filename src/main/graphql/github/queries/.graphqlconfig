@@ -7,7 +7,7 @@
         "url": "https://api.github.com/graphql",
         "headers": {
           "user-agent": "JS GraphQL",
-          "authorization": "token {token}"
+          "authorization": "token ${app.githubToken}"
         },
         "introspect": true
       }

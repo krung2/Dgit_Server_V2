@@ -24,6 +24,7 @@ dependencies {
   implementation 'org.springframework.boot:spring-boot-starter-web'
   implementation 'com.apollographql.apollo:apollo-runtime:2.5.9'
   implementation 'org.springframework.boot:spring-boot-configuration-processor:2.5.5'
+  implementation 'io.springfox:springfox-boot-starter:3.0.0'
   compileOnly 'org.projectlombok:lombok'
   runtimeOnly 'mysql:mysql-connector-java'
   annotationProcessor 'org.projectlombok:lombok'

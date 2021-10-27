@@ -9,5 +9,4 @@ public class DgitApplication {
   public static void main(String[] args) {
     SpringApplication.run(DgitApplication.class, args);
   }
-
 }

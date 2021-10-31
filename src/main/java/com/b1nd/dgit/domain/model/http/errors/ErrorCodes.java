@@ -9,7 +9,11 @@ import org.springframework.http.HttpStatus;
 public enum ErrorCodes {
 
   ENTITY_NOT_FOUND (HttpStatus.BAD_REQUEST, "찾지 못했습니다"),
-  TOKEN_VERIFY_ERROR(HttpStatus.UNAUTHORIZED, "잘못된 토큰입니다");
+
+  TOKEN_VERIFY_ERROR(HttpStatus.UNAUTHORIZED, "잘못된 토큰입니다"),
+
+  REST_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "dauth서버 오류")
+  ;
 
   private final HttpStatus status;
   private final String message;

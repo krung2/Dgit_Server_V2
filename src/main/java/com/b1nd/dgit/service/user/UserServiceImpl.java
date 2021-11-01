@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public void modifyGithubId(ModifyGithubDto modifyGithubDto) {
-
+  public void modifyGithubId(String userId, ModifyGithubDto modifyGithubDto) {
+    userRepository.save(findById(userId).update(modifyGithubDto.getGithubId()));
   }
 }

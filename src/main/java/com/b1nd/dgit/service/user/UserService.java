@@ -8,5 +8,5 @@ public interface UserService {
 
   User save(DodamOpenApiDto dodamOpenApiDto);
   User findById(String id);
-  void modifyGithubId(ModifyGithubDto modifyGithubDto);
+  void modifyGithubId(String userId, ModifyGithubDto modifyGithubDto);
 }

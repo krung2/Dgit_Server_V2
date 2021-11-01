@@ -10,4 +10,6 @@ import org.springframework.context.annotation.Configuration;
 public class AppProperties {
 
   private String githubToken;
+  private String secret;
+  private String refreshSecret;
 }

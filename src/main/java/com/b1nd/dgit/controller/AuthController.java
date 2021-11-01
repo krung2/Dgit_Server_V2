@@ -4,6 +4,7 @@ import com.b1nd.dgit.domain.dto.auth.DodamLoginDto;
 import com.b1nd.dgit.domain.model.http.ResponseData;
 import com.b1nd.dgit.domain.ro.auth.LoginRo;
 import com.b1nd.dgit.service.auth.AuthService;
+import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
+@Api(tags = {"Auth"})
 @RestController
 @RequestMapping(value = "/auth")
 @RequiredArgsConstructor

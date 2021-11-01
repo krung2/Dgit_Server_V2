@@ -12,4 +12,6 @@ public class AppProperties {
   private String githubToken;
   private String secret;
   private String refreshSecret;
+  private String clientId;
+  private String clientSecret;
 }

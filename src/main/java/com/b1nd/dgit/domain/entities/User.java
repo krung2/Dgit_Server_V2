@@ -28,7 +28,6 @@ public class User {
   public User(String id, String name, String github) {
     this.id = id;
     this.name = name;
-    this.github = github;
   }
 
   public User update(String github) {

@@ -1,7 +1,5 @@
 package com.b1nd.dgit.domain.model.http.errors;
 
-import org.springframework.http.ResponseEntity;
-
 public class CustomError extends RuntimeException {
 
   private final ErrorCodes errorCodes;

@@ -34,6 +34,8 @@ public class AuthServiceImpl implements AuthService {
     );
     DauthServerDto dauthServerDto = restTemplateConfig.dodamAuthTemplate().postForObject("/token", new HttpEntity<>(requestDto, null), DauthServerDto.class);
 
+
+
     HttpHeaders headers = new HttpHeaders();
     headers.add("authorization", "Bearer " + dauthServerDto.getData().getAccess_token());
     return restTemplateConfig.dodamOpenTemplate().exchange(

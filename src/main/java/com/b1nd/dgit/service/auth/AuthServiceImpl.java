@@ -12,6 +12,7 @@ import com.b1nd.dgit.enums.jwt.JwtAuth;
 import com.b1nd.dgit.service.token.TokenService;
 import com.b1nd.dgit.service.user.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -32,16 +33,17 @@ public class AuthServiceImpl implements AuthService {
             appProperties.getClientId(),
             appProperties.getClientSecret()
     );
-    DauthServerDto dauthServerDto = restTemplateConfig.dodamAuthTemplate().postForObject("/token", new HttpEntity<>(requestDto, null), DauthServerDto.class);
+    System.out.println("--------dauth Server request--------");
+    DauthServerDto dauthServerDto = restTemplateConfig.dodamAuthTemplate()
+            .postForObject("/token", new HttpEntity<>(requestDto, null), DauthServerDto.class);
 
-
-
+    System.out.println("--------dodam Server request--------");
     HttpHeaders headers = new HttpHeaders();
-    headers.add("authorization", "Bearer " + dauthServerDto.getData().getAccess_token());
+    headers.add("authorization", "Bearer " + dauthServerDto.getAccess_token());
     return restTemplateConfig.dodamOpenTemplate().exchange(
             "/user",
             HttpMethod.GET,
-            new HttpEntity<>("parameters", headers),
+            new HttpEntity<>(headers),
             DodamOpenApiDto.class
     ).getBody();
   }

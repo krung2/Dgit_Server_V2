@@ -26,6 +26,10 @@ public class AuthInterceptor implements HandlerInterceptor {
   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
     log.info("request url : {}", request.getRequestURI());
 
+    if (!(handler instanceof  HandlerMethod)) {
+      return true;
+    }
+
     HandlerMethod handlerMethod = (HandlerMethod)handler;
 
     if (!handlerMethod.getMethod().isAnnotationPresent(UserLoginToken.class)) {
@@ -33,6 +37,7 @@ public class AuthInterceptor implements HandlerInterceptor {
     }
 
     String token = AuthorizationExtractor.extract(request, "Bearer");
+
     if (Objects.equals(token, "")) {
       throw UnauthorizedException.of("토큰이 입력되지 않았습니다");
     }

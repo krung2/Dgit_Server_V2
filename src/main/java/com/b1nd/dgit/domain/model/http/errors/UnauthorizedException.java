@@ -2,7 +2,7 @@ package com.b1nd.dgit.domain.model.http.errors;
 
 public class UnauthorizedException extends CustomError {
 
-  public UnauthorizedException(String errorCode) {
+  public UnauthorizedException(ErrorCodes errorCode) {
     super(errorCode);
   }
 

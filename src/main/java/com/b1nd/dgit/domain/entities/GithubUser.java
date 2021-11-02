@@ -13,11 +13,10 @@ import javax.persistence.*;
 public class GithubUser extends BaseEntity {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "idx", unique = true, nullable = false)
-  private Long idx;
+  @Column(name = "github_id", unique = true, nullable = false)
+  private String githubId;
 
-  @OneToOne(fetch = FetchType.EAGER)
+  @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
   @JoinColumn(name = "fk_user_id")
   private User user;
 
@@ -31,7 +30,8 @@ public class GithubUser extends BaseEntity {
   private String bio;
 
   @Builder
-  public GithubUser(User user, int totalContributions, String userImage, String bio){
+  public GithubUser(String githubId, User user, int totalContributions, String userImage, String bio){
+    this.githubId = githubId;
     this.user = user;
     this.totalContributions = totalContributions;
     this.userImage = userImage;

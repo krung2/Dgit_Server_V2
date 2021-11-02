@@ -14,13 +14,12 @@ public class GithubUserServiceImpl implements GithubUserService {
   private final GithubUserRepository githubUserRepository;
 
   public GithubUser save (User user, GetContributionQuery.User githubUser) {
-    GithubUser createUser = GithubUser.builder()
+    return githubUserRepository.save(GithubUser.builder()
             .user(user)
             .totalContributions(githubUser.contributionsCollection().contributionCalendar().totalContributions())
             .userImage(githubUser.avatarUrl().toString())
             .bio(githubUser.bio())
-            .build();
-
-    return createUser;
+            .build()
+    );
   }
 }

@@ -5,6 +5,9 @@ import com.b1nd.dgit.domain.dto.user.ModifyGithubDto;
 import com.b1nd.dgit.domain.entities.User;
 import com.b1nd.dgit.domain.model.http.errors.BadRequestErrorException;
 import com.b1nd.dgit.domain.repositories.user.UserRepository;
+import com.b1nd.dgit.service.github.GithubService;
+import com.b1nd.dgit.service.githubUser.GithubUserService;
+import github.queries.GetContributionQuery;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +16,8 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 
   private final UserRepository userRepository;
+  private final GithubService githubServiceImpl;
+  private final GithubUserService githubUserServiceImpl;
 
   public User save (DodamOpenApiDto dodamOpenApiDto) {
     DodamOpenApiDto.DodamInfoData dodamInfoData = dodamOpenApiDto.getData();
@@ -33,6 +38,8 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public void modifyGithubId(String userId, ModifyGithubDto modifyGithubDto) {
-    userRepository.save(findById(userId).update(modifyGithubDto.getGithubId()));
+    User user = userRepository.save(findById(userId).update(modifyGithubDto.getGithubId()));
+    GetContributionQuery.Data githubData = githubServiceImpl.getData(user.getGithub()).getData();
+    githubUserServiceImpl.save(user, githubData.user());
   }
 }

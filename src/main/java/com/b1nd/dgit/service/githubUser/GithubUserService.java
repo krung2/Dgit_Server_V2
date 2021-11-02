@@ -7,4 +7,5 @@ import github.queries.GetContributionQuery;
 public interface GithubUserService {
 
   GithubUser save (User user, GetContributionQuery.User githubUser);
+  void remove (GithubUser githubUser);
 }

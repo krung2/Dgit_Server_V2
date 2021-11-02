@@ -27,6 +27,16 @@ public class GithubUserServiceImpl implements GithubUserService {
     );
   }
 
+  public GithubUser update (GetContributionQuery.User githubUser) {
+    return githubUserRepository.save(GithubUser.builder()
+            .githubId(githubUser.login())
+            .totalContributions(githubUser.contributionsCollection().contributionCalendar().totalContributions())
+            .userImage(githubUser.avatarUrl().toString())
+            .bio(githubUser.bio())
+            .build()
+    );
+  }
+
   public void remove (GithubUser githubUser) {
     githubUserRepository.delete(githubUser);
   }

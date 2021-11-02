@@ -2,6 +2,7 @@ package com.b1nd.dgit.service.user;
 
 import com.b1nd.dgit.domain.dto.dodam.DodamOpenApiDto;
 import com.b1nd.dgit.domain.dto.user.ModifyGithubDto;
+import com.b1nd.dgit.domain.entities.GithubUser;
 import com.b1nd.dgit.domain.entities.User;
 import com.b1nd.dgit.domain.model.http.errors.BadRequestErrorException;
 import com.b1nd.dgit.domain.repositories.user.UserRepository;
@@ -32,14 +33,14 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public User findById(String id) {
-    return this.userRepository.findById(id)
+    return userRepository.findById(id)
             .orElseThrow(() -> BadRequestErrorException.of("존재하지 않는 유저입니다"));
   }
 
   @Override
-  public void modifyGithubId(String userId, ModifyGithubDto modifyGithubDto) {
-    User user = userRepository.save(findById(userId).update(modifyGithubDto.getGithubId()));
-    GetContributionQuery.Data githubData = githubServiceImpl.getData(user.getGithub()).getData();
+  public void modifyGithubId(User user, ModifyGithubDto modifyGithubDto) {
+    githubUserServiceImpl.remove(user.getGithubUser() == null ? new GithubUser() : user.getGithubUser());
+    GetContributionQuery.Data githubData = githubServiceImpl.getData(modifyGithubDto.getGithubId()).getData();
     githubUserServiceImpl.save(user, githubData.user());
   }
 }

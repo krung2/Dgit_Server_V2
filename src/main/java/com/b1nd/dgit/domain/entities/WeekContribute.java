@@ -24,7 +24,7 @@ public class WeekContribute {
   private GithubUser githubUser;
 
   @Column(name = "contribute", nullable = false)
-  private Long contribute;
+  private int contribute;
 
   @Column(name = "date", nullable = false)
   private Date date;
@@ -33,7 +33,7 @@ public class WeekContribute {
   private WeekDay weekDay;
 
   @Builder
-  public WeekContribute (GithubUser githubUser, Long contribute, Date date, WeekDay weekDay) {
+  public WeekContribute (GithubUser githubUser, int contribute, Date date, WeekDay weekDay) {
     this.githubUser = githubUser;
     this.contribute = contribute;
     this.date = date;

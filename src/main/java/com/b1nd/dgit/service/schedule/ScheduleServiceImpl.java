@@ -28,4 +28,9 @@ public class ScheduleServiceImpl implements ScheduleService {
       contributeDays.forEach(contributeData -> weekServiceImpl.save(updateUser, contributeData));
     });
   }
+
+  public void weeklySchedule () {
+
+    weekServiceImpl.deleteAllData();
+  }
 }

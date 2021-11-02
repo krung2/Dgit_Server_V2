@@ -3,14 +3,15 @@ package com.b1nd.dgit.controller;
 import com.b1nd.dgit.domain.dto.token.RefreshTokenDto;
 import com.b1nd.dgit.domain.model.http.ResponseData;
 import com.b1nd.dgit.service.token.TokenService;
+import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import javax.validation.Valid;
 
+@Api(tags = {"Token"})
 @RestController(value = "/token")
 @RequiredArgsConstructor
 public class TokenController {

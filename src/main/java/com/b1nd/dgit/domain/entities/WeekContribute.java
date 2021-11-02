@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -26,17 +28,21 @@ public class WeekContribute {
   @Column(name = "contribute", nullable = false)
   private int contribute;
 
-  @Column(name = "date", nullable = false)
+  @Column(name = "date" , nullable = false)
   private Date date;
 
   @Column(name = "weekday", nullable = false)
   private WeekDay weekDay;
 
   @Builder
-  public WeekContribute (GithubUser githubUser, int contribute, Date date, WeekDay weekDay) {
+  public WeekContribute (GithubUser githubUser, int contribute, Object date, WeekDay weekDay) {
     this.githubUser = githubUser;
     this.contribute = contribute;
-    this.date = date;
+    try {
+      this.date = new SimpleDateFormat("yyyy-MM-dd").parse(date.toString());
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
     this.weekDay = weekDay;
   }
 }

@@ -2,11 +2,13 @@ package com.b1nd.dgit.service.githubUser;
 
 import com.b1nd.dgit.domain.entities.GithubUser;
 import com.b1nd.dgit.domain.entities.User;
-import com.b1nd.dgit.domain.model.http.errors.BadRequestErrorException;
 import com.b1nd.dgit.domain.repositories.user.GithubUserRepository;
 import github.queries.GetContributionQuery;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -27,5 +29,9 @@ public class GithubUserServiceImpl implements GithubUserService {
 
   public void remove (GithubUser githubUser) {
     githubUserRepository.delete(githubUser);
+  }
+
+  public List<GithubUser> githubUserList () {
+    return githubUserRepository.findAll(Sort.by(Sort.Direction.DESC, "totalContributions"));
   }
 }

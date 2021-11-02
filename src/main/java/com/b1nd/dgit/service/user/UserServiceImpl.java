@@ -12,6 +12,8 @@ import github.queries.GetContributionQuery;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -42,5 +44,9 @@ public class UserServiceImpl implements UserService {
     githubUserServiceImpl.remove(user.getGithubUser() == null ? new GithubUser() : user.getGithubUser());
     GetContributionQuery.Data githubData = githubServiceImpl.getData(modifyGithubDto.getGithubId()).getData();
     githubUserServiceImpl.save(user, githubData.user());
+  }
+
+   public List<GithubUser> githubUserList () {
+     return githubUserServiceImpl.githubUserList();
   }
 }

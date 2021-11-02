@@ -20,8 +20,8 @@ public class WeekContribute {
   private Long idx;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "fk_user_id")
-  private User user;
+  @JoinColumn(name = "github_id")
+  private GithubUser githubUser;
 
   @Column(name = "contribute", nullable = false)
   private Long contribute;
@@ -33,8 +33,8 @@ public class WeekContribute {
   private WeekDay weekDay;
 
   @Builder
-  public WeekContribute (User user, Long contribute, Date date, WeekDay weekDay) {
-    this.user = user;
+  public WeekContribute (GithubUser githubUser, Long contribute, Date date, WeekDay weekDay) {
+    this.githubUser = githubUser;
     this.contribute = contribute;
     this.date = date;
     this.weekDay = weekDay;

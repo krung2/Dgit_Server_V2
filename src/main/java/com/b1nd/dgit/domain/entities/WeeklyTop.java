@@ -19,8 +19,8 @@ public class WeeklyTop extends BaseEntity {
   private Long idx;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "fk_user_id")
-  private User user;
+  @JoinColumn(name = "github_id")
+  private GithubUser githubId;
 
   @Column(name = "contribute", nullable = false)
   private Long contribute;
@@ -29,8 +29,8 @@ public class WeeklyTop extends BaseEntity {
   private Date date;
 
   @Builder
-  public WeeklyTop (User user, Long contribute, Date date) {
-    this.user = user;
+  public WeeklyTop (GithubUser githubUser, Long contribute, Date date) {
+    this.githubId = githubUser;
     this.contribute = contribute;
     this.date = date;
   }

@@ -1,5 +1,6 @@
 package com.b1nd.dgit.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,7 @@ public class GithubUser extends BaseEntity {
   @Column(name = "github_id", unique = true, nullable = false)
   private String githubId;
 
+  @JsonManagedReference
   @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
   @JoinColumn(name = "fk_user_id")
   private User user;

@@ -7,6 +7,6 @@ public interface TokenService {
 
   String generateToken (String userId, JwtAuth jwtAuth);
   User validateToken (String token);
-  String RefreshToken (String refreshToken);
+  String refreshToken (String refreshToken);
 
 }

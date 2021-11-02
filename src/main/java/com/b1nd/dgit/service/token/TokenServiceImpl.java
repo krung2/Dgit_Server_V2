@@ -87,7 +87,7 @@ public class TokenServiceImpl implements TokenService {
   }
 
   @Override
-  public String RefreshToken(String refreshToken) {
+  public String refreshToken(String refreshToken) {
 
     if (refreshToken == null || refreshToken.trim().isEmpty()) {
       throw BadRequestErrorException.of("토큰이 전송되지 않았습니다");

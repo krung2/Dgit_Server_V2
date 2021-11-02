@@ -7,7 +7,6 @@ import com.b1nd.dgit.domain.model.http.Response;
 import com.b1nd.dgit.service.user.UserService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +27,6 @@ public class UserController {
           final @Valid @RequestBody ModifyGithubDto modifyGithubDto
   ) {
     userServiceImpl.modifyGithubId(user.getId(), modifyGithubDto);
-    return Response.res(HttpStatus.OK, "깃허브 수정 성공");
+    return Response.ok("깃허브 수정 성공");
   }
 }

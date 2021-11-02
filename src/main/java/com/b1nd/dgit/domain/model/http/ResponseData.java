@@ -19,4 +19,8 @@ public class ResponseData<T> extends Response {
   public static <T> ResponseEntity<ResponseData<T>> res (HttpStatus httpStatus, String message, T data) {
     return new ResponseEntity<>(ResponseData.of(httpStatus, message, data), httpStatus);
   }
+
+  public static <T> ResponseEntity<ResponseData<T>> ok (String message, T data) {
+    return new ResponseEntity<>(ResponseData.of(HttpStatus.OK, message, data), HttpStatus.OK);
+  }
 }

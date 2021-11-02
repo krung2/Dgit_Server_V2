@@ -25,8 +25,7 @@ public class AuthController {
 
   @PostMapping(value = "/login")
   public ResponseEntity<ResponseData<LoginRo>> login (final @Valid @RequestBody DodamLoginDto dodamLoginDto) {
-    return ResponseData.res(
-            HttpStatus.OK,
+    return ResponseData.ok(
             "로그인 성공",
             this.authServiceImpl.dodamLogin(dodamLoginDto)
     );

@@ -23,4 +23,7 @@ public class Response {
   public static ResponseEntity<Response> res (HttpStatus httpStatus, String message) {
     return new ResponseEntity<>(Response.of(httpStatus, message), httpStatus);
   }
+  public static ResponseEntity<Response> ok (String message) {
+    return new ResponseEntity<>(Response.of(HttpStatus.OK, message), HttpStatus.OK);
+  }
 }

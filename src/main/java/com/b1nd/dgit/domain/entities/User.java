@@ -3,10 +3,7 @@ package com.b1nd.dgit.domain.entities;
 import lombok.*;
 import org.jetbrains.annotations.NotNull;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "user")
@@ -21,19 +18,12 @@ public class User {
   @NotNull
   private String name;
 
-  @Column(name = "github", nullable = true)
-  private String github;
+  @OneToOne(mappedBy = "user", fetch = FetchType.EAGER)
+  private GithubUser githubUser;
 
   @Builder
-  public User(String id, String name, String github) {
+  public User(String id, String name) {
     this.id = id;
     this.name = name;
-    this.github = github;
-  }
-
-  public User update(String github) {
-    this.github = github;
-
-    return this;
   }
 }

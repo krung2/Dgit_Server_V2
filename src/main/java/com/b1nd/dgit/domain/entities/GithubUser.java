@@ -22,7 +22,7 @@ public class GithubUser extends BaseEntity {
   private User user;
 
   @Column(name = "total_contributions", nullable = false)
-  private Long totalContributions;
+  private int totalContributions;
 
   @Column(name = "user_image", nullable = true)
   private String userImage;
@@ -31,14 +31,14 @@ public class GithubUser extends BaseEntity {
   private String bio;
 
   @Builder
-  public GithubUser(User user, Long totalContributions, String userImage, String bio){
+  public GithubUser(User user, int totalContributions, String userImage, String bio){
     this.user = user;
     this.totalContributions = totalContributions;
     this.userImage = userImage;
     this.bio = bio;
   }
 
-  public GithubUser update(Long totalContributions, String userImage, String bio){
+  public GithubUser update(int totalContributions, String userImage, String bio){
     this.totalContributions = totalContributions;
     this.userImage = userImage;
     this.bio = bio;

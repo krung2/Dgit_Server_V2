@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class WeeklyTopServiceImpl {
+public class WeeklyTopServiceImpl implements WeeklyTopService {
 
   private final WeeklyTopRepository weeklyTopRepository;
   private final WeekService weekService;

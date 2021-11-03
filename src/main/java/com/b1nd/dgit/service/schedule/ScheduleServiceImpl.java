@@ -4,13 +4,12 @@ import com.b1nd.dgit.domain.entities.GithubUser;
 import com.b1nd.dgit.service.github.GithubService;
 import com.b1nd.dgit.service.githubUser.GithubUserService;
 import com.b1nd.dgit.service.week.WeekService;
+import com.b1nd.dgit.service.weekly.WeeklyTopService;
 import github.queries.GetContributionQuery;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -18,6 +17,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 
   private final GithubUserService githubUserService;
   private final WeekService weekServiceImpl;
+  private final WeeklyTopService weeklyTopServiceImpl;
   private final GithubService githubService;
 
   public void weekContributeCheck() {
@@ -33,8 +33,11 @@ public class ScheduleServiceImpl implements ScheduleService {
     });
   }
 
-  public void weeklySchedule () {
+  public void DailySchedule () {
 
-    weekServiceImpl.deleteAllData();
+  }
+
+  public void weeklySchedule () {
+    weeklyTopServiceImpl.save();
   }
 }

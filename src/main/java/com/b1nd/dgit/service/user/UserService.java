@@ -12,5 +12,4 @@ public interface UserService {
   User save(DodamOpenApiDto dodamOpenApiDto);
   User findById(String id);
   void modifyGithubId(User user, ModifyGithubDto modifyGithubDto);
-  List<GithubUser> githubUserListSort ();
 }

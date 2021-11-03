@@ -46,7 +46,4 @@ public class UserServiceImpl implements UserService {
     githubUserServiceImpl.save(user, githubData.user());
   }
 
-   public List<GithubUser> githubUserListSort () {
-     return githubUserServiceImpl.githubUserListSort();
-  }
 }

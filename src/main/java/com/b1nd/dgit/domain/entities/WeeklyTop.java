@@ -23,13 +23,13 @@ public class WeeklyTop extends BaseEntity {
   private GithubUser githubId;
 
   @Column(name = "contribute", nullable = false)
-  private Long contribute;
+  private int contribute;
 
   @Column(name = "date", nullable = false)
   private Date date;
 
   @Builder
-  public WeeklyTop (GithubUser githubUser, Long contribute, Date date) {
+  public WeeklyTop (GithubUser githubUser, int contribute, Date date) {
     this.githubId = githubUser;
     this.contribute = contribute;
     this.date = date;

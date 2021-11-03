@@ -1,9 +1,9 @@
 package com.b1nd.dgit.controller;
 
+
 import com.b1nd.dgit.domain.entities.WeeklyTop;
 import com.b1nd.dgit.domain.model.http.ResponseData;
-import com.b1nd.dgit.domain.ro.week.WeeklyRankRo;
-import com.b1nd.dgit.service.week.WeekService;
+import com.b1nd.dgit.service.weekly.WeeklyTopService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -13,16 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Api(tags = {"Week"})
+@Api(tags = {"Weekly-Top"})
 @RestController
-@RequestMapping(value = "/week")
+@RequestMapping(value = "/weekly")
 @RequiredArgsConstructor
-public class WeekController {
+public class WeeklyTopController {
 
-  private final WeekService weekServiceImpl;
+  private final WeeklyTopService weeklyTopServiceImpl;
 
-  @GetMapping(value = "")
-  public ResponseEntity<ResponseData<List<WeeklyRankRo>>> getWeeklyData () {
-    return ResponseData.ok("주별 랭킹 조회 성공", weekServiceImpl.getWeeklyRanking());
+  @GetMapping(value = "/top")
+  public ResponseEntity<ResponseData<List<WeeklyTop>>> getWeeklyData() {
+    return ResponseData.ok("주별 기록 조회 성공", weeklyTopServiceImpl.findAllData());
   }
 }

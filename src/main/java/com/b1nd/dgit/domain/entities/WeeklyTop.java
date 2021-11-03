@@ -20,7 +20,7 @@ public class WeeklyTop extends BaseEntity {
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "github_id")
-  private GithubUser githubId;
+  private GithubUser githubUser;
 
   @Column(name = "contribute", nullable = false)
   private int contribute;
@@ -30,7 +30,7 @@ public class WeeklyTop extends BaseEntity {
 
   @Builder
   public WeeklyTop (GithubUser githubUser, int contribute, Date date) {
-    this.githubId = githubUser;
+    this.githubUser = githubUser;
     this.contribute = contribute;
     this.date = date;
   }

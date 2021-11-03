@@ -18,7 +18,7 @@ public class GithubUser extends BaseEntity {
   private String githubId;
 
   @JsonManagedReference
-  @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+  @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   @JoinColumn(name = "fk_user_id")
   private User user;
 

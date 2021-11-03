@@ -9,7 +9,7 @@ import java.util.List;
 public interface GithubUserService {
 
   GithubUser save (User user, GetContributionQuery.User githubUser);
-  GithubUser update (GetContributionQuery.User githubUser);
+  GithubUser update (GithubUser userData, GetContributionQuery.User githubUser);
   void remove (GithubUser githubUser);
   List<GithubUser> githubUserListSort ();
   List<GithubUser> githubUserList ();

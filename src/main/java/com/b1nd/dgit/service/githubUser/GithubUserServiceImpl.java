@@ -27,14 +27,12 @@ public class GithubUserServiceImpl implements GithubUserService {
     );
   }
 
-  public GithubUser update (GetContributionQuery.User githubUser) {
-    return githubUserRepository.save(GithubUser.builder()
-            .githubId(githubUser.login())
-            .totalContributions(githubUser.contributionsCollection().contributionCalendar().totalContributions())
-            .userImage(githubUser.avatarUrl().toString())
-            .bio(githubUser.bio())
-            .build()
-    );
+  public GithubUser update (GithubUser userData, GetContributionQuery.User githubUser) {
+    return githubUserRepository.save(userData.update(
+            githubUser.contributionsCollection().contributionCalendar().totalContributions(),
+            githubUser.avatarUrl().toString(),
+            githubUser.bio()
+            ));
   }
 
   public void remove (GithubUser githubUser) {

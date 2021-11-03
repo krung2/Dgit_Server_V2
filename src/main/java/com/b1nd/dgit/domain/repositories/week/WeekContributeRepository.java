@@ -8,5 +8,5 @@ import java.util.List;
 public interface WeekContributeRepository extends JpaRepository<WeekContribute, Long> {
 
   void deleteAll ();
-  List<WeekContribute> getAll ();
+  List<WeekContribute> findAll ();
 }

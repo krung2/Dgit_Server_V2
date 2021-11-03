@@ -41,6 +41,6 @@ public class UserController {
 
   @GetMapping("/all")
   public ResponseEntity<ResponseData<List<GithubUser>>> githubUserList () {
-    return ResponseData.ok("깃허브 유저 가져오기 성공", userServiceImpl.githubUserList());
+    return ResponseData.ok("깃허브 유저 가져오기 성공", userServiceImpl.githubUserListSort());
   }
 }

@@ -39,4 +39,12 @@ public class GithubUser extends BaseEntity {
     this.userImage = userImage;
     this.bio = bio;
   }
+
+  public GithubUser update (int totalContributions, String userImage, String bio) {
+    this.totalContributions = totalContributions;
+    this.userImage = userImage;
+    this.bio = bio;
+
+    return this;
+  }
 }

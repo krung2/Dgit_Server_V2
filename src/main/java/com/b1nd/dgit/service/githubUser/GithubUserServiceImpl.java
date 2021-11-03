@@ -41,7 +41,15 @@ public class GithubUserServiceImpl implements GithubUserService {
     githubUserRepository.delete(githubUser);
   }
 
+  public List<GithubUser> githubUserListSort () {
+    return githubUserRepository.findEntityGraph(Sort.by(Sort.Direction.DESC, "totalContributions"));
+  }
+
   public List<GithubUser> githubUserList () {
-    return githubUserRepository.findAll(Sort.by(Sort.Direction.DESC, "totalContributions"));
+    return githubUserRepository.findEntityGraph();
+  }
+
+  public GithubUser findById (String githubId) {
+    return githubUserRepository.getById(githubId);
   }
 }

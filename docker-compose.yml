@@ -1,0 +1,18 @@
+version: "3"
+services:
+  dgitv2_database:
+    container_name: dgitv2
+    image: mysql:5.7
+    environment:
+      MYSQL_DATABASE: dgitv2
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_ROOT_HOST: '%'
+    ports:
+      - 33304:3306
+
+  dgitv2_application:
+    build: .
+    ports:
+      - 8088:8080
+    depends_on:
+      - dgitv2_database

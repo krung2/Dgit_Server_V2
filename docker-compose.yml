@@ -1,16 +1,21 @@
 version: "3"
 services:
   dgitv2_database:
-    container_name: dgitv2
+    container_name: dgitv2-mysql
     image: mysql:5.7
     environment:
       MYSQL_DATABASE: dgitv2
       MYSQL_ROOT_PASSWORD: 1234
       MYSQL_ROOT_HOST: '%'
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+
     ports:
       - 33304:3306
 
   dgitv2_application:
+    container_name: dgitv2
     build: .
     ports:
       - 8088:8080

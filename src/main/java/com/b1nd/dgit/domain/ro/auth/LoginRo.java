@@ -1,5 +1,6 @@
 package com.b1nd.dgit.domain.ro.auth;
 
+import com.b1nd.dgit.domain.entities.GithubUser;
 import com.b1nd.dgit.domain.entities.User;
 import lombok.Builder;
 import lombok.Getter;

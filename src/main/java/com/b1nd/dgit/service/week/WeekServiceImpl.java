@@ -35,31 +35,39 @@ public class WeekServiceImpl implements WeekService{
   }
 
   public List<WeekContribute> getAllData () {
-    return weekContributeRepository.getAll();
+    return weekContributeRepository.findAll();
   }
 
   public List<WeeklyRankRo> getWeeklyRanking () {
 
     Map<GithubUser, Integer> userToCommit = new HashMap<>();
-
-    githubUserService.githubUserList().forEach(githubUser -> userToCommit.put(githubUser, 0));
+    Map<String, Integer> userIdWeekCommit = new HashMap<>();
+    githubUserService.githubUserList().forEach(githubUser -> {
+      userToCommit.put(githubUser, 0);
+    });
 
     getAllData().forEach(weekContribute -> {
-      if(!userToCommit.containsKey(weekContribute.getGithubUser())) {
-        userToCommit.put(
-                weekContribute.getGithubUser(),
-                weekContribute.getContribute()
+      if (userIdWeekCommit.containsKey(weekContribute.getGithubUser().getGithubId())) {
+        userIdWeekCommit.put(
+                weekContribute.getGithubUser().getGithubId(),
+                userIdWeekCommit.get(weekContribute.getGithubUser().getGithubId()) + weekContribute.getContribute()
         );
       } else {
-        userToCommit.put(
-                weekContribute.getGithubUser(),
-                userToCommit.get(weekContribute.getGithubUser()) + weekContribute.getContribute()
+        userIdWeekCommit.put(
+                weekContribute.getGithubUser().getGithubId(),
+                weekContribute.getContribute()
         );
       }
     });
 
     WeeklyRankRo[] weeklyRanks = userToCommit.entrySet().stream()
-            .map(data -> new WeeklyRankRo(data.getKey(), data.getValue())).toArray(WeeklyRankRo[]::new);
+            .map(data -> {
+                if (userIdWeekCommit.containsKey(data.getKey().getGithubId())) {
+                  return new WeeklyRankRo(data.getKey(), userIdWeekCommit.get(data.getKey().getGithubId()));
+                } else {
+                  return new WeeklyRankRo(data.getKey(), data.getValue());
+                }
+            }).toArray(WeeklyRankRo[]::new);
 
     return Arrays.stream(weeklyRanks)
             .sorted(Comparator.comparing(WeeklyRankRo::getWeeklyCommit).reversed())

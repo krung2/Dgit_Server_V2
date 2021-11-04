@@ -14,4 +14,5 @@ public interface GithubUserService {
   List<GithubUser> githubUserListSort ();
   List<GithubUser> githubUserList ();
   GithubUser findById (String githubId);
+  boolean existUser (String githubId);
 }

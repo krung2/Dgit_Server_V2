@@ -2,6 +2,7 @@ package com.b1nd.dgit.service.githubUser;
 
 import com.b1nd.dgit.domain.entities.GithubUser;
 import com.b1nd.dgit.domain.entities.User;
+import com.b1nd.dgit.domain.model.http.errors.UnauthorizedException;
 import com.b1nd.dgit.domain.repositories.user.GithubUserRepository;
 import github.queries.GetContributionQuery;
 import lombok.RequiredArgsConstructor;
@@ -48,6 +49,10 @@ public class GithubUserServiceImpl implements GithubUserService {
   }
 
   public GithubUser findById (String githubId) {
-    return githubUserRepository.getById(githubId);
+    return githubUserRepository.findById(githubId).orElseThrow(() -> UnauthorizedException.of("존재하지 않는 계정입니다"));
+  }
+
+  public boolean existUser (String githubId) {
+    return githubUserRepository.findById(githubId).isPresent();
   }
 }

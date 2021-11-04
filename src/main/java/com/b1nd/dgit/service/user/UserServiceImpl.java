@@ -45,5 +45,4 @@ public class UserServiceImpl implements UserService {
     githubUserServiceImpl.remove(user.getGithubUser() == null ? new GithubUser() : user.getGithubUser());
     githubUserServiceImpl.save(user, githubData.user());
   }
-
 }

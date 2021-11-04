@@ -19,7 +19,7 @@ public class WeeklyTop extends BaseEntity {
   @Column(name = "idx", unique = true, nullable = false)
   private Long idx;
 
-  @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+  @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
   @JoinColumn(name = "github_id")
   private GithubUser githubUser;
 

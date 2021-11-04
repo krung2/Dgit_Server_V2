@@ -25,24 +25,39 @@ public class Scheduler {
 
   @Scheduled(cron = "0 0 8,10,12,14,16,18,20,23 * * *")
   public void weekContributeCheck() {
+
+    System.out.println("-------------n시 스케쥴 시작-------------");
+
     weekServiceImpl.deleteAllData();
     githubUserService.githubUserList().forEach(githubUser -> {
-      GetContributionQuery.User githubData = githubService.getData(githubUser.getGithubId()).getData().user();
-      List<GetContributionQuery.Week> weekCommit = githubData.contributionsCollection().contributionCalendar().weeks();
-      List<GetContributionQuery.ContributionDay> contributeDays = weekCommit.get(weekCommit.size() - 1).contributionDays();
+      try {
+        GetContributionQuery.User githubData = githubService.getData(githubUser.getGithubId()).getData().user();
+        List<GetContributionQuery.Week> weekCommit = githubData.contributionsCollection().contributionCalendar().weeks();
+        if (weekCommit.size() == 0) return;
+        List<GetContributionQuery.ContributionDay> contributeDays = weekCommit.get(weekCommit.size() - 1).contributionDays();
 
-      GithubUser updateUser = githubUserService.update(githubUser, githubData);
-      contributeDays.forEach(contributeData -> weekServiceImpl.save(updateUser, contributeData));
+        GithubUser updateUser = githubUserService.update(githubUser, githubData);
+        contributeDays.forEach(contributeData -> weekServiceImpl.save(updateUser, contributeData));
+      } catch (Exception e) {
+        e.printStackTrace();
+        System.out.println(githubUser.getUser().getName() + " 업데이트 중 오류 발생");
+      }
     });
+
+    System.out.println("-------------n시 스케쥴 종료-------------");
   }
 
   @Scheduled(cron = "0 0 0 * * 1-6")
   public void DailySchedule () {
+    System.out.println("-------------일간 스케쥴 시작-------------");
     totalTopService.save();
+    System.out.println("-------------일간 스케쥴 종료-------------");
   }
 
   @Scheduled(cron = "0 0 0 * * 0")
   public void weeklySchedule () {
+    System.out.println("-------------주간 스케쥴 시작-------------");
     weeklyTopServiceImpl.save();
+    System.out.println("-------------주간 스케쥴 종료-------------");
   }
 }

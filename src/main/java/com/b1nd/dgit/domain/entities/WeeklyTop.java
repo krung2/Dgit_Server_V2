@@ -9,6 +9,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Getter
 @Table(name = "weekly_top")
 @NoArgsConstructor
 public class WeeklyTop extends BaseEntity {
@@ -18,7 +19,7 @@ public class WeeklyTop extends BaseEntity {
   @Column(name = "idx", unique = true, nullable = false)
   private Long idx;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
   @JoinColumn(name = "github_id")
   private GithubUser githubUser;
 

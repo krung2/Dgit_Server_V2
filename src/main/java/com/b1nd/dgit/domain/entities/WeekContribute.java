@@ -20,7 +20,7 @@ public class WeekContribute {
   @Column(name = "idx", unique = true, nullable = false)
   private Long idx;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
   @JoinColumn(name = "github_id")
   private GithubUser githubUser;
 

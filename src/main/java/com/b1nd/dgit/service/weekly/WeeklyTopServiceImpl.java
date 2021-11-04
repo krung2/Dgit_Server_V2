@@ -1,5 +1,8 @@
 package com.b1nd.dgit.service.weekly;
 
+import com.b1nd.dgit.domain.dto.weekly.WeeklyTopGithubUser;
+import com.b1nd.dgit.domain.dto.weekly.WeeklyTopListDto;
+import com.b1nd.dgit.domain.dto.weekly.WeeklyTopUser;
 import com.b1nd.dgit.domain.entities.WeeklyTop;
 import com.b1nd.dgit.domain.repositories.week.WeeklyTopRepository;
 import com.b1nd.dgit.domain.ro.week.WeeklyRankRo;
@@ -8,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -25,7 +29,24 @@ public class WeeklyTopServiceImpl implements WeeklyTopService {
             .build());
   }
 
-  public List<WeeklyTop> findAllData () {
-    return weeklyTopRepository.findEntityGraph(Sort.by(Sort.Direction.DESC, "createdAt"));
+  public List<WeeklyTopListDto> findAllData () {
+    List<WeeklyTopListDto> weeklyTopListDtoList = new ArrayList<>();
+    weeklyTopRepository.findEntityGraph(Sort.by(Sort.Direction.DESC, "createdAt"))
+            .forEach(weeklyTop -> weeklyTopListDtoList.add(new WeeklyTopListDto(
+                    weeklyTop.getIdx(),
+                    weeklyTop.getDate(),
+                    weeklyTop.getContribute(),
+                    new WeeklyTopGithubUser(
+                            weeklyTop.getGithubUser().getGithubId(),
+                            weeklyTop.getGithubUser().getTotalContributions(),
+                            weeklyTop.getGithubUser().getUserImage(),
+                            weeklyTop.getGithubUser().getBio(),
+                            new WeeklyTopUser(
+                                    weeklyTop.getGithubUser().getUser().getId(),
+                                    weeklyTop.getGithubUser().getUser().getName()
+                            )
+                    )
+            )));
+     return weeklyTopListDtoList;
   }
 }

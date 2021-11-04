@@ -1,6 +1,7 @@
 package com.b1nd.dgit.controller;
 
 
+import com.b1nd.dgit.domain.dto.weekly.WeeklyTopListDto;
 import com.b1nd.dgit.domain.entities.WeeklyTop;
 import com.b1nd.dgit.domain.model.http.ResponseData;
 import com.b1nd.dgit.service.weekly.WeeklyTopService;
@@ -22,7 +23,7 @@ public class WeeklyTopController {
   private final WeeklyTopService weeklyTopServiceImpl;
 
   @GetMapping(value = "/top")
-  public ResponseEntity<ResponseData<List<WeeklyTop>>> getWeeklyData() {
+  public ResponseEntity<ResponseData<List<WeeklyTopListDto>>> getWeeklyData() {
     return ResponseData.ok("주별 기록 조회 성공", weeklyTopServiceImpl.findAllData());
   }
 }

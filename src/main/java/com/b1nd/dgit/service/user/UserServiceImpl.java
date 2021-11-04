@@ -5,6 +5,7 @@ import com.b1nd.dgit.domain.dto.user.ModifyGithubDto;
 import com.b1nd.dgit.domain.entities.GithubUser;
 import com.b1nd.dgit.domain.entities.User;
 import com.b1nd.dgit.domain.model.http.errors.BadRequestErrorException;
+import com.b1nd.dgit.domain.model.http.errors.UnauthorizedException;
 import com.b1nd.dgit.domain.repositories.user.UserRepository;
 import com.b1nd.dgit.service.github.GithubService;
 import com.b1nd.dgit.service.githubUser.GithubUserService;
@@ -39,8 +40,9 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public void modifyGithubId(User user, ModifyGithubDto modifyGithubDto) {
-    githubUserServiceImpl.remove(user.getGithubUser() == null ? new GithubUser() : user.getGithubUser());
+    if (githubUserServiceImpl.existUser(modifyGithubDto.getGithubId())) throw UnauthorizedException.of("이미 존재하는 계정입니다");
     GetContributionQuery.Data githubData = githubServiceImpl.getData(modifyGithubDto.getGithubId()).getData();
+    githubUserServiceImpl.remove(user.getGithubUser() == null ? new GithubUser() : user.getGithubUser());
     githubUserServiceImpl.save(user, githubData.user());
   }
 

@@ -1,6 +1,7 @@
 package com.b1nd.dgit.domain.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.jetbrains.annotations.NotNull;
 
@@ -19,8 +20,9 @@ public class User {
   @NotNull
   private String name;
 
-  @JsonIgnore
   @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
+  @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
+  @JsonIgnore
   private GithubUser githubUser;
 
   @Builder

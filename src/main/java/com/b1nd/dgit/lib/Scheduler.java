@@ -48,7 +48,7 @@ public class Scheduler {
     log.debug("-------------n시 스케쥴 종료-------------");
   }
 
-  @Scheduled(cron = "0 0 * * * *")
+  @Scheduled(cron = "0 0 0 * * *")
   public void DailySchedule() {
     log.debug("-------------일간 스케쥴 시작-------------");
     totalTopService.save();

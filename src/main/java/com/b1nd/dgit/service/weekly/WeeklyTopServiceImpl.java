@@ -32,21 +32,7 @@ public class WeeklyTopServiceImpl implements WeeklyTopService {
   public List<WeeklyTopListDto> findAllData () {
     List<WeeklyTopListDto> weeklyTopListDtoList = new ArrayList<>();
     weeklyTopRepository.findEntityGraph(Sort.by(Sort.Direction.DESC, "createdAt"))
-            .forEach(weeklyTop -> weeklyTopListDtoList.add(new WeeklyTopListDto(
-                    weeklyTop.getIdx(),
-                    weeklyTop.getDate(),
-                    weeklyTop.getContribute(),
-                    new WeeklyTopGithubUser(
-                            weeklyTop.getGithubUser().getGithubId(),
-                            weeklyTop.getGithubUser().getTotalContributions(),
-                            weeklyTop.getGithubUser().getUserImage(),
-                            weeklyTop.getGithubUser().getBio(),
-                            new WeeklyTopUser(
-                                    weeklyTop.getGithubUser().getUser().getId(),
-                                    weeklyTop.getGithubUser().getUser().getName()
-                            )
-                    )
-            )));
+            .forEach(weeklyTop -> weeklyTopListDtoList.add(WeeklyTopListDto.of(weeklyTop)));
      return weeklyTopListDtoList;
   }
 }

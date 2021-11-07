@@ -16,7 +16,7 @@ public class WeeklyTopGithubUser {
   private String bio;
   private WeeklyTopUser weeklyTopUser;
 
-  public static WeeklyTopGithubUser of (GithubUser githubUser) {
+  public static WeeklyTopGithubUser of(GithubUser githubUser) {
     return WeeklyTopGithubUser.builder()
             .githubId(githubUser.getGithubId())
             .totalContributions(githubUser.getTotalContributions())

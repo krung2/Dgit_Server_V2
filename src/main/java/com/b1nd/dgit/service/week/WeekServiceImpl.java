@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class WeekServiceImpl implements WeekService{
+public class WeekServiceImpl implements WeekService {
 
   private final GithubUserService githubUserService;
   private final WeekContributeRepository weekContributeRepository;
@@ -30,15 +30,15 @@ public class WeekServiceImpl implements WeekService{
     );
   }
 
-  public void deleteAllData () {
+  public void deleteAllData() {
     weekContributeRepository.deleteAll();
   }
 
-  public List<WeekContribute> getAllData () {
+  public List<WeekContribute> getAllData() {
     return weekContributeRepository.findAll();
   }
 
-  public List<WeeklyRankRo> getWeeklyRanking () {
+  public List<WeeklyRankRo> getWeeklyRanking() {
 
     Map<GithubUser, Integer> userToCommit = new HashMap<>();
     Map<String, Integer> userIdWeekCommit = new HashMap<>();
@@ -62,11 +62,11 @@ public class WeekServiceImpl implements WeekService{
 
     WeeklyRankRo[] weeklyRanks = userToCommit.entrySet().stream()
             .map(data -> {
-                if (userIdWeekCommit.containsKey(data.getKey().getGithubId())) {
-                  return new WeeklyRankRo(data.getKey(), userIdWeekCommit.get(data.getKey().getGithubId()));
-                } else {
-                  return new WeeklyRankRo(data.getKey(), data.getValue());
-                }
+              if (userIdWeekCommit.containsKey(data.getKey().getGithubId())) {
+                return new WeeklyRankRo(data.getKey(), userIdWeekCommit.get(data.getKey().getGithubId()));
+              } else {
+                return new WeeklyRankRo(data.getKey(), data.getValue());
+              }
             }).toArray(WeeklyRankRo[]::new);
 
     return Arrays.stream(weeklyRanks)

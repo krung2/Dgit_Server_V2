@@ -33,7 +33,7 @@ public class UserController {
 
   @UserLoginToken
   @GetMapping(value = "/my")
-  public ResponseEntity<ResponseData<User>> getUser (@RequestAttribute User user) {
+  public ResponseEntity<ResponseData<User>> getUser(@RequestAttribute User user) {
     return ResponseData.ok("자신의 정보 가져오기 성공", userServiceImpl.findById(user.getId()));
   }
 }

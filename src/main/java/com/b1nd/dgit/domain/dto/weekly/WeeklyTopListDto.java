@@ -15,7 +15,7 @@ public class WeeklyTopListDto {
   private int contribute;
   private WeeklyTopGithubUser weeklyTopGithubUser;
 
-  public static WeeklyTopListDto of (WeeklyTop weeklyTop) {
+  public static WeeklyTopListDto of(WeeklyTop weeklyTop) {
     return WeeklyTopListDto.builder()
             .idx(weeklyTop.getIdx())
             .date(weeklyTop.getDate())

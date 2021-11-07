@@ -14,7 +14,7 @@ public class CustomError extends RuntimeException {
     this.errorCodes = errorCode;
   }
 
-  public static CustomError of (ErrorCodes errorCodes) {
+  public static CustomError of(ErrorCodes errorCodes) {
     return new CustomError(errorCodes);
   }
 

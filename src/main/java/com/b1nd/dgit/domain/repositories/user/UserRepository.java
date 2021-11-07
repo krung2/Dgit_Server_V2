@@ -1,7 +1,6 @@
 package com.b1nd.dgit.domain.repositories.user;
 
 import com.b1nd.dgit.domain.entities.User;
-import com.sun.istack.NotNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

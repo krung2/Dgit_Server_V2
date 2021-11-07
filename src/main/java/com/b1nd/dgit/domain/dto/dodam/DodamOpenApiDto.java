@@ -9,7 +9,7 @@ public class DodamOpenApiDto extends RestBaseDto {
 
   private final DodamInfoData data;
 
-  public DodamOpenApiDto (int status, String message, DodamInfoData data) {
+  public DodamOpenApiDto(int status, String message, DodamInfoData data) {
     super(status, message);
     this.data = new DodamInfoData(data);
   }
@@ -27,7 +27,7 @@ public class DodamOpenApiDto extends RestBaseDto {
     private final String profileImage;
     private final int accessLevel;
 
-    public DodamInfoData (DodamInfoData data) {
+    public DodamInfoData(DodamInfoData data) {
       this.uniqueId = data.getUniqueId();
       this.grade = data.getGrade();
       this.room = data.getRoom();

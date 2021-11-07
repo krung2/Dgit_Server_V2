@@ -15,13 +15,12 @@ public enum ErrorCodes {
   TOKEN_FORGED_ERROR(HttpStatus.UNAUTHORIZED, "위조된 토큰입니다"),
 
   INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "서버 오류"),
-  REST_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "dauth서버 오류")
-  ;
+  REST_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "dauth서버 오류");
 
   private final HttpStatus status;
   private final String message;
 
-  ErrorCodes (HttpStatus status, String message) {
+  ErrorCodes(HttpStatus status, String message) {
     this.status = status;
     this.message = message;
   }

@@ -1,6 +1,5 @@
 package com.b1nd.dgit.domain.entities;
 
-import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 

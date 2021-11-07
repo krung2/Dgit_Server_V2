@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import javax.validation.Valid;
 
 @Api(tags = {"Token"})
@@ -21,7 +22,7 @@ public class TokenController {
   private final TokenService tokenServiceImpl;
 
   @PostMapping(value = "/refresh")
-  public ResponseEntity<ResponseData<String>> refreshToken (final @RequestBody @Valid RefreshTokenDto refreshTokenDto) {
+  public ResponseEntity<ResponseData<String>> refreshToken(final @RequestBody @Valid RefreshTokenDto refreshTokenDto) {
     return ResponseData.ok("토큰 재발급 성공", tokenServiceImpl.refreshToken(refreshTokenDto.getRefreshToken()));
   }
 }

@@ -20,24 +20,24 @@ public class TotalTopServiceImpl implements TotalTopService {
   private final TotalTopRepository totalTopRepository;
   private final GithubUserService githubUserServiceImpl;
 
-  public void save () {
+  public void save() {
     totalTopRepository.save(TotalTop.builder()
             .user(githubUserServiceImpl.githubUserListSort().get(0).getUser())
             .date(new Date())
             .build());
   }
 
-  public int getTotalTop (User githubTopUser) {
+  public int getTotalTop(User githubTopUser) {
     List<TotalTop> totalTopList = totalTopRepository.findEntityGraph(Sort.by(Sort.Direction.DESC, "date"));
 
     int streak = 0;
     if (totalTopList.size() == 0) {
-      return  streak;
+      return streak;
     }
 
     for (TotalTop totalTop : totalTopList) {
       if (totalTop.getUser() == githubTopUser) {
-        streak ++;
+        streak++;
         continue;
       }
       break;
@@ -46,7 +46,7 @@ public class TotalTopServiceImpl implements TotalTopService {
     return streak;
   }
 
-  public TotalRankRo getTotalRank () {
+  public TotalRankRo getTotalRank() {
     List<GithubUser> users = githubUserServiceImpl.githubUserListSort();
 
     return TotalRankRo.builder()

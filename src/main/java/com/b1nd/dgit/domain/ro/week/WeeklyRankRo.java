@@ -13,7 +13,7 @@ public class WeeklyRankRo {
   private int weeklyCommit;
 
   @Builder
-  public WeeklyRankRo (GithubUser githubUser, int weeklyCommit) {
+  public WeeklyRankRo(GithubUser githubUser, int weeklyCommit) {
     this.githubUser = githubUser;
     this.weeklyCommit = weeklyCommit;
   }

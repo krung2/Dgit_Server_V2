@@ -32,7 +32,7 @@ public class GithubUser extends BaseEntity {
   private String bio;
 
   @Builder
-  public GithubUser(String githubId, User user, int totalContributions, String userImage, String bio){
+  public GithubUser(String githubId, User user, int totalContributions, String userImage, String bio) {
     this.githubId = githubId;
     this.user = user;
     this.totalContributions = totalContributions;
@@ -40,7 +40,7 @@ public class GithubUser extends BaseEntity {
     this.bio = bio;
   }
 
-  public GithubUser update (int totalContributions, String userImage, String bio) {
+  public GithubUser update(int totalContributions, String userImage, String bio) {
     this.totalContributions = totalContributions;
     this.userImage = userImage;
     this.bio = bio;

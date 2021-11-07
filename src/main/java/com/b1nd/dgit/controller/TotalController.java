@@ -19,7 +19,7 @@ public class TotalController {
   private final TotalTopService totalTopServiceImpl;
 
   @GetMapping
-  public ResponseEntity<ResponseData<TotalRankRo>> getTotalRank () {
+  public ResponseEntity<ResponseData<TotalRankRo>> getTotalRank() {
     return ResponseData.ok(
             "순위 조회 성공",
             totalTopServiceImpl.getTotalRank()

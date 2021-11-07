@@ -3,7 +3,6 @@ package com.b1nd.dgit.domain.dto.dodam;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.ToString;
 
 @Getter
 @Builder

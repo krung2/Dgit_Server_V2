@@ -10,7 +10,10 @@ import java.util.List;
 public interface WeekService {
 
   WeekContribute save(GithubUser githubUser, GetContributionQuery.ContributionDay contributionData);
-  void deleteAllData ();
-  List<WeekContribute> getAllData ();
-  List<WeeklyRankRo> getWeeklyRanking ();
+
+  void deleteAllData();
+
+  List<WeekContribute> getAllData();
+
+  List<WeeklyRankRo> getWeeklyRanking();
 }

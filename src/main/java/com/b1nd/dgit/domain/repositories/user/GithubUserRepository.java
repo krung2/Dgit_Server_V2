@@ -13,11 +13,11 @@ public interface GithubUserRepository extends JpaRepository<GithubUser, String> 
 
   @EntityGraph(attributePaths = "user")
   @Query("select githubUser from GithubUser githubUser")
-  List<GithubUser> findEntityGraph ();
+  List<GithubUser> findEntityGraph();
 
   @EntityGraph(attributePaths = "user")
   @Query("select githubUser from GithubUser githubUser")
-  List<GithubUser> findEntityGraph (Sort sort);
+  List<GithubUser> findEntityGraph(Sort sort);
 
   @Override
   Optional<GithubUser> findById(String githubId);

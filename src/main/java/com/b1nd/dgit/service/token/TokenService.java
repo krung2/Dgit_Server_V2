@@ -5,8 +5,10 @@ import com.b1nd.dgit.enums.jwt.JwtAuth;
 
 public interface TokenService {
 
-  String generateToken (String userId, JwtAuth jwtAuth);
-  User validateToken (String token);
-  String refreshToken (String refreshToken);
+  String generateToken(String userId, JwtAuth jwtAuth);
+
+  User validateToken(String token);
+
+  String refreshToken(String refreshToken);
 
 }

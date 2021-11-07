@@ -5,5 +5,5 @@ import com.b1nd.dgit.domain.ro.auth.LoginRo;
 
 public interface AuthService {
 
-  LoginRo dodamLogin (DodamLoginDto dodamLoginDto);
+  LoginRo dodamLogin(DodamLoginDto dodamLoginDto);
 }

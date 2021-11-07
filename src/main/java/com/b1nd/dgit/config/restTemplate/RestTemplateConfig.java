@@ -14,7 +14,7 @@ public class RestTemplateConfig {
 
   private final RestTemplateBuilder restTemplateBuilder;
 
-  private RestTemplate restTemplate (final String endpoint) {
+  private RestTemplate restTemplate(final String endpoint) {
     return restTemplateBuilder.rootUri(endpoint)
             .additionalInterceptors(new RestTemplateClientHttpRequestInterceptor())
             .errorHandler(new RestTemplateErrorHandler())
@@ -23,12 +23,12 @@ public class RestTemplateConfig {
   }
 
   @Bean
-  public RestTemplate dodamAuthTemplate () {
+  public RestTemplate dodamAuthTemplate() {
     return this.restTemplate("http://dauth.b1nd.com/api");
   }
 
   @Bean
-  public RestTemplate dodamOpenTemplate () {
+  public RestTemplate dodamOpenTemplate() {
     return this.restTemplate("http://open.dodam.b1nd.com/api");
   }
 }

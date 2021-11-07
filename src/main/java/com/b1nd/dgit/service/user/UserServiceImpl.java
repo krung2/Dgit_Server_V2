@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
 
   @Override
   @Transactional
-  public User save (DodamOpenApiDto dodamOpenApiDto) {
+  public User save(DodamOpenApiDto dodamOpenApiDto) {
     DodamOpenApiDto.DodamInfoData dodamInfoData = dodamOpenApiDto.getData();
     return userRepository.save(DodamOpenApiDto.DodamInfoData.toEntity(dodamInfoData));
   }

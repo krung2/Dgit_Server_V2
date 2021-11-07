@@ -19,7 +19,7 @@ public class ApolloClientConfig {
             .build();
   }
 
-  private OkHttpClient getOkHttpClient (final String token) {
+  private OkHttpClient getOkHttpClient(final String token) {
     return new OkHttpClient.Builder()
             .addInterceptor(getApiKeyInterceptor(token))
             .build();

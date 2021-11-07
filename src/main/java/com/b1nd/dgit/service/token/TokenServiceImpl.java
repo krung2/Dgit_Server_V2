@@ -44,7 +44,7 @@ public class TokenServiceImpl implements TokenService {
       secretKey = appProperties.getRefreshSecret();
     }
 
-    Map<String ,Object> claims = new HashMap<>();
+    Map<String, Object> claims = new HashMap<>();
     claims.put("userId", userId);
 
     return Jwts.builder()
@@ -56,7 +56,7 @@ public class TokenServiceImpl implements TokenService {
             .compact();
   }
 
-  private Claims parseToken (String token, JwtAuth jwtAuth) {
+  private Claims parseToken(String token, JwtAuth jwtAuth) {
     try {
       return Jwts.parser()
               .setSigningKey(

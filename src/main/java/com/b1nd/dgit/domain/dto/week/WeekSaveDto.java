@@ -1,7 +1,6 @@
 package com.b1nd.dgit.domain.dto.week;
 
 import com.b1nd.dgit.enums.week.WeekDay;
-import github.queries.GetContributionQuery;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Getter
@@ -30,7 +29,7 @@ public class WeeklyTop extends BaseEntity {
   private String date;
 
   @Builder
-  public WeeklyTop (GithubUser githubUser, int contribute) {
+  public WeeklyTop(GithubUser githubUser, int contribute) {
     this.githubUser = githubUser;
     this.contribute = contribute;
     this.date = LocalDate.now().toString();

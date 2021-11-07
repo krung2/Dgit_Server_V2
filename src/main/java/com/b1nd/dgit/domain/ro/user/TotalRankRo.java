@@ -15,7 +15,7 @@ public class TotalRankRo {
   private int totalTop;
 
   @Builder
-  public TotalRankRo (List<GithubUser> users, int totalTop) {
+  public TotalRankRo(List<GithubUser> users, int totalTop) {
     this.users = users;
     this.totalTop = totalTop;
   }

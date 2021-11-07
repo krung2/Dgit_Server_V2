@@ -26,7 +26,7 @@ public class TotalTop {
   private Date date;
 
   @Builder
-  public TotalTop (User user, Date date) {
+  public TotalTop(User user, Date date) {
     this.user = user;
     this.date = date;
   }

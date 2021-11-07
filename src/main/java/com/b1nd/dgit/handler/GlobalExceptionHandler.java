@@ -20,13 +20,13 @@ import java.util.List;
 public class GlobalExceptionHandler {
 
   @ExceptionHandler(MethodArgumentNotValidException.class)
-  protected ResponseEntity<ResponseData<List<FieldError>>> handleMethodArgumentNotValidException (MethodArgumentNotValidException e) {
+  protected ResponseEntity<ResponseData<List<FieldError>>> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
     log.error("타입 검증 중 오류 발생", e);
     return ResponseData.res(HttpStatus.BAD_REQUEST, "타입 검증 중 오류 발생", e.getFieldErrors());
   }
 
   @ExceptionHandler(BindException.class)
-  protected ResponseEntity<Response> handleBindException (BindException e) {
+  protected ResponseEntity<Response> handleBindException(BindException e) {
     log.error("바인딩 중 오류 발생", e);
     return Response.res(HttpStatus.BAD_REQUEST, "바인딩 중 오류 발생");
   }

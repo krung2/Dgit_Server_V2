@@ -8,11 +8,17 @@ import java.util.List;
 
 public interface GithubUserService {
 
-  GithubUser save (User user, GetContributionQuery.User githubUser);
-  GithubUser update (GithubUser userData, GetContributionQuery.User githubUser);
-  void remove (GithubUser githubUser);
-  List<GithubUser> githubUserListSort ();
-  List<GithubUser> githubUserList ();
-  GithubUser findById (String githubId);
-  boolean existUser (String githubId);
+  GithubUser save(User user, GetContributionQuery.User githubUser);
+
+  GithubUser update(GithubUser userData, GetContributionQuery.User githubUser);
+
+  void remove(GithubUser githubUser);
+
+  List<GithubUser> githubUserListSort();
+
+  List<GithubUser> githubUserList();
+
+  GithubUser findById(String githubId);
+
+  boolean existUser(String githubId);
 }

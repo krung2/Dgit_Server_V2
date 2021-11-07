@@ -31,12 +31,12 @@ public class RestTemplateErrorHandler implements ResponseErrorHandler {
     throw new CustomError(ErrorCodes.REST_SERVER_ERROR);
   }
 
-  private String getErrorAsString (@NonNull final ClientHttpResponse response) throws IOException {
+  private String getErrorAsString(@NonNull final ClientHttpResponse response) throws IOException {
 
-    try(
+    try (
             BufferedReader bufferedReader = new BufferedReader((new InputStreamReader(response.getBody())))
     ) {
-      return  bufferedReader.readLine();
+      return bufferedReader.readLine();
     }
   }
 

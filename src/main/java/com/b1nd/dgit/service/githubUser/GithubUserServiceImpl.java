@@ -17,7 +17,7 @@ public class GithubUserServiceImpl implements GithubUserService {
 
   private final GithubUserRepository githubUserRepository;
 
-  public GithubUser save (User user, GetContributionQuery.User githubUser) {
+  public GithubUser save(User user, GetContributionQuery.User githubUser) {
     return githubUserRepository.save(GithubUser.builder()
             .githubId(githubUser.login())
             .user(user)
@@ -28,31 +28,31 @@ public class GithubUserServiceImpl implements GithubUserService {
     );
   }
 
-  public GithubUser update (GithubUser userData, GetContributionQuery.User githubUser) {
+  public GithubUser update(GithubUser userData, GetContributionQuery.User githubUser) {
     return githubUserRepository.save(userData.update(
             githubUser.contributionsCollection().contributionCalendar().totalContributions(),
             githubUser.avatarUrl().toString(),
             githubUser.bio()
-            ));
+    ));
   }
 
-  public void remove (GithubUser githubUser) {
+  public void remove(GithubUser githubUser) {
     githubUserRepository.delete(githubUser);
   }
 
-  public List<GithubUser> githubUserListSort () {
+  public List<GithubUser> githubUserListSort() {
     return githubUserRepository.findEntityGraph(Sort.by(Sort.Direction.DESC, "totalContributions"));
   }
 
-  public List<GithubUser> githubUserList () {
+  public List<GithubUser> githubUserList() {
     return githubUserRepository.findEntityGraph();
   }
 
-  public GithubUser findById (String githubId) {
+  public GithubUser findById(String githubId) {
     return githubUserRepository.findById(githubId).orElseThrow(() -> UnauthorizedException.of("존재하지 않는 계정입니다"));
   }
 
-  public boolean existUser (String githubId) {
+  public boolean existUser(String githubId) {
     return githubUserRepository.findById(githubId).isPresent();
   }
 }

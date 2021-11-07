@@ -1,6 +1,5 @@
 package com.b1nd.dgit.controller;
 
-import com.b1nd.dgit.domain.entities.WeeklyTop;
 import com.b1nd.dgit.domain.model.http.ResponseData;
 import com.b1nd.dgit.domain.ro.week.WeeklyRankRo;
 import com.b1nd.dgit.service.week.WeekService;
@@ -22,7 +21,7 @@ public class WeekController {
   private final WeekService weekServiceImpl;
 
   @GetMapping(value = "")
-  public ResponseEntity<ResponseData<List<WeeklyRankRo>>> getWeeklyData () {
+  public ResponseEntity<ResponseData<List<WeeklyRankRo>>> getWeeklyData() {
     return ResponseData.ok("주별 랭킹 조회 성공", weekServiceImpl.getWeeklyRanking());
   }
 }

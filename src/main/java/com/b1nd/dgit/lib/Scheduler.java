@@ -49,14 +49,14 @@ public class Scheduler {
   }
 
   @Scheduled(cron = "0 0 * * * *")
-  public void DailySchedule () {
+  public void DailySchedule() {
     log.debug("-------------일간 스케쥴 시작-------------");
     totalTopService.save();
     log.debug("-------------일간 스케쥴 종료-------------");
   }
 
   @Scheduled(cron = "0 0 0 * * 0")
-  public void weeklySchedule () {
+  public void weeklySchedule() {
     log.debug("-------------주간 스케쥴 시작-------------");
     weeklyTopServiceImpl.save();
     log.debug("-------------주간 스케쥴 종료-------------");

@@ -11,7 +11,7 @@ public class AuthorizationExtractor {
 
   public static String AUTHORIZATION = "Authorization";
 
-  public static String extract (HttpServletRequest request, String type) {
+  public static String extract(HttpServletRequest request, String type) {
     Enumeration<String> headers = request.getHeaders(AUTHORIZATION);
 
     while (headers.hasMoreElements()) {

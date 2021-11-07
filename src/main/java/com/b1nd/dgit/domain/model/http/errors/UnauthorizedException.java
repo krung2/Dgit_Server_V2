@@ -6,7 +6,7 @@ public class UnauthorizedException extends CustomError {
     super(errorCode);
   }
 
-  public static CustomError of (String message) {
+  public static CustomError of(String message) {
     return new CustomError(message, ErrorCodes.ENTITY_NOT_FOUND);
   }
 }

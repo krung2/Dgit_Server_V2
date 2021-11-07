@@ -3,8 +3,8 @@ package com.b1nd.dgit.service.auth;
 import com.b1nd.dgit.config.AppProperties;
 import com.b1nd.dgit.config.restTemplate.RestTemplateConfig;
 import com.b1nd.dgit.domain.dto.auth.DodamLoginDto;
-import com.b1nd.dgit.domain.dto.dodam.DauthServerDto;
 import com.b1nd.dgit.domain.dto.dodam.DauthRequestDto;
+import com.b1nd.dgit.domain.dto.dodam.DauthServerDto;
 import com.b1nd.dgit.domain.dto.dodam.DodamOpenApiDto;
 import com.b1nd.dgit.domain.entities.User;
 import com.b1nd.dgit.domain.ro.auth.LoginRo;
@@ -12,7 +12,6 @@ import com.b1nd.dgit.enums.jwt.JwtAuth;
 import com.b1nd.dgit.service.token.TokenService;
 import com.b1nd.dgit.service.user.UserService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -27,7 +26,7 @@ public class AuthServiceImpl implements AuthService {
   private final RestTemplateConfig restTemplateConfig;
   private final AppProperties appProperties;
 
-  private DodamOpenApiDto getCodeToDodamInfo (final String code) {
+  private DodamOpenApiDto getCodeToDodamInfo(final String code) {
     DauthRequestDto requestDto = DauthRequestDto.builder()
             .code(code)
             .client_id(appProperties.getClientId())

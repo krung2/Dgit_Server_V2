@@ -2,7 +2,6 @@ package com.b1nd.dgit.controller;
 
 import com.b1nd.dgit.annotation.UserLoginToken;
 import com.b1nd.dgit.domain.dto.user.ModifyGithubDto;
-import com.b1nd.dgit.domain.entities.GithubUser;
 import com.b1nd.dgit.domain.entities.User;
 import com.b1nd.dgit.domain.model.http.Response;
 import com.b1nd.dgit.domain.model.http.ResponseData;
@@ -13,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @Api(tags = {"User"})
 @RestController

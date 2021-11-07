@@ -1,8 +1,6 @@
 package com.b1nd.dgit.controller;
 
-
 import com.b1nd.dgit.domain.dto.weekly.WeeklyTopListDto;
-import com.b1nd.dgit.domain.entities.WeeklyTop;
 import com.b1nd.dgit.domain.model.http.ResponseData;
 import com.b1nd.dgit.service.weekly.WeeklyTopService;
 import io.swagger.annotations.Api;

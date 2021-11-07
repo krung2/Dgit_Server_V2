@@ -8,12 +8,14 @@ import com.b1nd.dgit.service.week.WeekService;
 import com.b1nd.dgit.service.weekly.WeeklyTopService;
 import github.queries.GetContributionQuery;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
+@Slf4j
 @RequiredArgsConstructor
 public class Scheduler {
 
@@ -25,8 +27,7 @@ public class Scheduler {
 
   @Scheduled(cron = "0 0 8,10,12,14,16,18,20,23 * * *")
   public void weekContributeCheck() {
-
-    System.out.println("-------------n시 스케쥴 시작-------------");
+    log.debug("-------------n시 스케쥴 시작-------------");
 
     weekServiceImpl.deleteAllData();
     githubUserService.githubUserList().forEach(githubUser -> {
@@ -44,20 +45,20 @@ public class Scheduler {
       }
     });
 
-    System.out.println("-------------n시 스케쥴 종료-------------");
+    log.debug("-------------n시 스케쥴 종료-------------");
   }
 
-  @Scheduled(cron = "0 0 0 * * 1-6")
+  @Scheduled(cron = "0 0 * * * *")
   public void DailySchedule () {
-    System.out.println("-------------일간 스케쥴 시작-------------");
+    log.debug("-------------일간 스케쥴 시작-------------");
     totalTopService.save();
-    System.out.println("-------------일간 스케쥴 종료-------------");
+    log.debug("-------------일간 스케쥴 종료-------------");
   }
 
   @Scheduled(cron = "0 0 0 * * 0")
   public void weeklySchedule () {
-    System.out.println("-------------주간 스케쥴 시작-------------");
+    log.debug("-------------주간 스케쥴 시작-------------");
     weeklyTopServiceImpl.save();
-    System.out.println("-------------주간 스케쥴 종료-------------");
+    log.debug("-------------주간 스케쥴 종료-------------");
   }
 }

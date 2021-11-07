@@ -2,6 +2,7 @@ package com.b1nd.dgit.domain.dto.dodam;
 
 import com.b1nd.dgit.domain.entities.User;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 
 @Getter
@@ -15,6 +16,7 @@ public class DodamOpenApiDto extends RestBaseDto {
   }
 
   @Getter
+  @Builder
   @AllArgsConstructor
   public static class DodamInfoData {
 

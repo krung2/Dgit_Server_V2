@@ -80,7 +80,6 @@ public class TokenServiceImpl implements TokenService {
 
   @Override
   public User validateToken(String token) {
-
     return userServiceImpl.findById(
             parseToken(token, JwtAuth.ACCESS).get("userId").toString()
     );
@@ -88,7 +87,6 @@ public class TokenServiceImpl implements TokenService {
 
   @Override
   public String refreshToken(String refreshToken) {
-
     if (refreshToken == null || refreshToken.trim().isEmpty()) {
       throw BadRequestErrorException.of("토큰이 전송되지 않았습니다");
     }

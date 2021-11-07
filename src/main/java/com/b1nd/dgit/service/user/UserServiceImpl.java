@@ -23,13 +23,7 @@ public class UserServiceImpl implements UserService {
 
   public User save (DodamOpenApiDto dodamOpenApiDto) {
     DodamOpenApiDto.DodamInfoData dodamInfoData = dodamOpenApiDto.getData();
-    return userRepository.save(
-            User
-                    .builder()
-                    .id(dodamInfoData.getUniqueId())
-                    .name(dodamInfoData.getName())
-                    .build()
-    );
+    return userRepository.save(DodamOpenApiDto.DodamInfoData.toEntity(dodamInfoData));
   }
 
   @Override

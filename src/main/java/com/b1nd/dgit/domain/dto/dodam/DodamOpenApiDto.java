@@ -1,5 +1,6 @@
 package com.b1nd.dgit.domain.dto.dodam;
 
+import com.b1nd.dgit.domain.entities.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -35,6 +36,13 @@ public class DodamOpenApiDto extends RestBaseDto {
       this.email = data.getEmail();
       this.profileImage = data.getProfileImage();
       this.accessLevel = data.getAccessLevel();
+    }
+
+    public static User toEntity(DodamInfoData data) {
+      return User.builder()
+              .id(data.getUniqueId())
+              .name(data.getName())
+              .build();
     }
   }
 }

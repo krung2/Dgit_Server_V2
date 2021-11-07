@@ -10,7 +10,7 @@ import java.util.Date;
 public class WeeklyTopListDto {
 
   private Long idx;
-  private Date date;
+  private String date;
   private int contribute;
   private WeeklyTopGithubUser weeklyTopGithubUser;
 }

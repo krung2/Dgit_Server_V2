@@ -1,11 +1,11 @@
 package com.b1nd.dgit.domain.entities;
 
-import com.b1nd.dgit.enums.week.WeekDay;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -27,12 +27,12 @@ public class WeeklyTop extends BaseEntity {
   private int contribute;
 
   @Column(name = "date", nullable = false)
-  private Date date;
+  private String date;
 
   @Builder
-  public WeeklyTop (GithubUser githubUser, int contribute, Date date) {
+  public WeeklyTop (GithubUser githubUser, int contribute) {
     this.githubUser = githubUser;
     this.contribute = contribute;
-    this.date = date;
+    this.date = LocalDate.now().toString();
   }
 }

@@ -12,6 +12,7 @@ import com.b1nd.dgit.service.githubUser.GithubUserService;
 import github.queries.GetContributionQuery;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -21,6 +22,8 @@ public class UserServiceImpl implements UserService {
   private final GithubService githubServiceImpl;
   private final GithubUserService githubUserServiceImpl;
 
+  @Override
+  @Transactional
   public User save (DodamOpenApiDto dodamOpenApiDto) {
     DodamOpenApiDto.DodamInfoData dodamInfoData = dodamOpenApiDto.getData();
     return userRepository.save(DodamOpenApiDto.DodamInfoData.toEntity(dodamInfoData));
@@ -33,6 +36,7 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
+  @Transactional
   public void modifyGithubId(User user, ModifyGithubDto modifyGithubDto) {
     if (githubUserServiceImpl.existUser(modifyGithubDto.getGithubId())) throw UnauthorizedException.of("이미 존재하는 계정입니다");
     GetContributionQuery.Data githubData = githubServiceImpl.getData(modifyGithubDto.getGithubId()).getData();

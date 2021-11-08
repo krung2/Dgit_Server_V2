@@ -30,6 +30,7 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
+  @Transactional
   public User findById(String id) {
     return userRepository.findById(id)
             .orElseThrow(() -> BadRequestErrorException.of("존재하지 않는 유저입니다"));

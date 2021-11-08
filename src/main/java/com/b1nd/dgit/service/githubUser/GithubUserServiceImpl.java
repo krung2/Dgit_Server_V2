@@ -5,9 +5,11 @@ import com.b1nd.dgit.domain.entities.User;
 import com.b1nd.dgit.domain.model.http.errors.UnauthorizedException;
 import com.b1nd.dgit.domain.repositories.user.GithubUserRepository;
 import github.queries.GetContributionQuery;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,7 +19,8 @@ public class GithubUserServiceImpl implements GithubUserService {
 
   private final GithubUserRepository githubUserRepository;
 
-  public GithubUser save(User user, GetContributionQuery.User githubUser) {
+  @Transactional
+  public GithubUser save(final User user, @NonNull GetContributionQuery.User githubUser) {
     return githubUserRepository.save(GithubUser.builder()
             .githubId(githubUser.login())
             .user(user)
@@ -28,7 +31,8 @@ public class GithubUserServiceImpl implements GithubUserService {
     );
   }
 
-  public GithubUser update(GithubUser userData, GetContributionQuery.User githubUser) {
+  @Transactional
+  public GithubUser update(final GithubUser userData, final GetContributionQuery.User githubUser) {
     return githubUserRepository.save(userData.update(
             githubUser.contributionsCollection().contributionCalendar().totalContributions(),
             githubUser.avatarUrl().toString(),
@@ -36,23 +40,26 @@ public class GithubUserServiceImpl implements GithubUserService {
     ));
   }
 
-  public void remove(GithubUser githubUser) {
+  public void remove(final GithubUser githubUser) {
     githubUserRepository.delete(githubUser);
   }
 
+  @Transactional(readOnly = true)
   public List<GithubUser> githubUserListSort() {
     return githubUserRepository.findEntityGraph(Sort.by(Sort.Direction.DESC, "totalContributions"));
   }
 
+  @Transactional(readOnly = true)
   public List<GithubUser> githubUserList() {
     return githubUserRepository.findEntityGraph();
   }
 
-  public GithubUser findById(String githubId) {
+  @Transactional(readOnly = true)
+  public GithubUser findById(final String githubId) {
     return githubUserRepository.findById(githubId).orElseThrow(() -> UnauthorizedException.of("존재하지 않는 계정입니다"));
   }
 
-  public boolean existUser(String githubId) {
+  public boolean existUser(final String githubId) {
     return githubUserRepository.findById(githubId).isPresent();
   }
 }

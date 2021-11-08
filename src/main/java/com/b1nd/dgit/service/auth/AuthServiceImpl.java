@@ -27,18 +27,21 @@ public class AuthServiceImpl implements AuthService {
   private final AppProperties appProperties;
 
   private DodamOpenApiDto getCodeToDodamInfo(final String code) {
-    DauthRequestDto requestDto = DauthRequestDto.builder()
-            .code(code)
-            .client_id(appProperties.getClientId())
-            .client_secret(appProperties.getClientSecret())
-            .build();
     System.out.println("--------dauth Server request--------");
     DauthServerDto dauthServerDto = restTemplateConfig.dodamAuthTemplate()
-            .postForObject("/token", new HttpEntity<>(requestDto, null), DauthServerDto.class);
+            .postForObject("/token", new HttpEntity<>(
+                    DauthRequestDto.builder()
+                            .code(code)
+                            .client_id(appProperties.getClientId())
+                            .client_secret(appProperties.getClientSecret())
+                            .build(),
+                    null
+            ), DauthServerDto.class);
 
     System.out.println("--------dodam Server request--------");
     HttpHeaders headers = new HttpHeaders();
     headers.add("authorization", "Bearer " + dauthServerDto.getAccess_token());
+
     return restTemplateConfig.dodamOpenTemplate().exchange(
             "/user",
             HttpMethod.GET,

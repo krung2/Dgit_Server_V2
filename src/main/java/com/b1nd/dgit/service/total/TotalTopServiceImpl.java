@@ -9,6 +9,7 @@ import com.b1nd.dgit.service.githubUser.GithubUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -20,6 +21,7 @@ public class TotalTopServiceImpl implements TotalTopService {
   private final TotalTopRepository totalTopRepository;
   private final GithubUserService githubUserServiceImpl;
 
+  @Transactional
   public void save() {
     totalTopRepository.save(TotalTop.builder()
             .user(githubUserServiceImpl.githubUserListSort().get(0).getUser())
@@ -28,8 +30,15 @@ public class TotalTopServiceImpl implements TotalTopService {
   }
 
   public int getTotalTop(User githubTopUser) {
-    List<TotalTop> totalTopList = totalTopRepository.findEntityGraph(Sort.by(Sort.Direction.DESC, "date"));
+    return countTopStreak(
+            githubTopUser,
+            totalTopRepository.findEntityGraph(
+                    Sort.by(Sort.Direction.DESC, "date")
+            )
+    );
+  }
 
+  private int countTopStreak (User githubTopUser, List<TotalTop> totalTopList) {
     int streak = 0;
     if (totalTopList.size() == 0) {
       return streak;

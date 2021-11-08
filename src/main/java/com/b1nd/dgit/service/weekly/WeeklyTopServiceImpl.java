@@ -8,6 +8,7 @@ import com.b1nd.dgit.service.week.WeekService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,7 @@ public class WeeklyTopServiceImpl implements WeeklyTopService {
   private final WeeklyTopRepository weeklyTopRepository;
   private final WeekService weekService;
 
+  @Transactional
   public void save() {
     WeeklyRankRo weeklyRankRo = weekService.getWeeklyRanking().get(0);
     weeklyTopRepository.save(WeeklyTop.builder()
@@ -27,6 +29,7 @@ public class WeeklyTopServiceImpl implements WeeklyTopService {
             .build());
   }
 
+  @Transactional(readOnly = true)
   public List<WeeklyTopListDto> findAllData() {
     List<WeeklyTopListDto> weeklyTopListDtoList = new ArrayList<>();
     weeklyTopRepository.findEntityGraph(Sort.by(Sort.Direction.DESC, "createdAt"))

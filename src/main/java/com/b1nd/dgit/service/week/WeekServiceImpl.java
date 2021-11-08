@@ -9,6 +9,7 @@ import com.b1nd.dgit.service.githubUser.GithubUserService;
 import github.queries.GetContributionQuery;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -20,6 +21,7 @@ public class WeekServiceImpl implements WeekService {
   private final GithubUserService githubUserService;
   private final WeekContributeRepository weekContributeRepository;
 
+  @Transactional
   public WeekContribute save(GithubUser githubUser, GetContributionQuery.ContributionDay contributionData) {
     return weekContributeRepository.save(WeekContribute.builder()
             .githubUser(githubUser)
@@ -34,17 +36,17 @@ public class WeekServiceImpl implements WeekService {
     weekContributeRepository.deleteAll();
   }
 
+  @Transactional(readOnly = true)
   public List<WeekContribute> getAllData() {
     return weekContributeRepository.findAll();
   }
 
+  @Transactional(readOnly = true)
   public List<WeeklyRankRo> getWeeklyRanking() {
 
     Map<GithubUser, Integer> userToCommit = new HashMap<>();
     Map<String, Integer> userIdWeekCommit = new HashMap<>();
-    githubUserService.githubUserList().forEach(githubUser -> {
-      userToCommit.put(githubUser, 0);
-    });
+    githubUserService.githubUserList().forEach(githubUser -> userToCommit.put(githubUser, 0));
 
     getAllData().forEach(weekContribute -> {
       if (userIdWeekCommit.containsKey(weekContribute.getGithubUser().getGithubId())) {

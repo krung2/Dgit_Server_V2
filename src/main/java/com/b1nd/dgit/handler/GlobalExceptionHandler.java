@@ -13,6 +13,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @RestControllerAdvice
@@ -49,4 +50,9 @@ public class GlobalExceptionHandler {
     return Response.res(HttpStatus.INTERNAL_SERVER_ERROR, "서버 오류 발생");
   }
 
+  @ExceptionHandler(EntityNotFoundException.class)
+  protected ResponseEntity<Response> handleEntityNotFoundException(EntityNotFoundException e) {
+    log.error("찾지 못하였습니다", e);
+    return Response.res(HttpStatus.BAD_REQUEST, "찾지 못하였습니다");
+  }
 }

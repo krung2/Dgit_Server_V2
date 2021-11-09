@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  @Transactional
+  // 로직 안에서 Error를 throw하므로, @Transaction을 사용하는 것은 고려해보아야 할 것 같습니다
   public void modifyGithubId(User user, ModifyGithubDto modifyGithubDto) {
     if (githubUserServiceImpl.existUser(modifyGithubDto.getGithubId())) throw UnauthorizedException.of("이미 존재하는 계정입니다");
     GetContributionQuery.Data githubData = githubServiceImpl.getData(modifyGithubDto.getGithubId()).getData();

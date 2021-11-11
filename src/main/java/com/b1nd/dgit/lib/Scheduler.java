@@ -30,7 +30,7 @@ public class Scheduler {
     log.debug("-------------n시 스케쥴 시작-------------");
 
     weekServiceImpl.deleteAllData();
-    githubUserService.githubUserList().forEach(githubUser -> {
+    githubUserService.getGithubUserList().forEach(githubUser -> {
       try {
         GetContributionQuery.User githubData = githubService.getData(githubUser.getGithubId()).getData().user();
         List<GetContributionQuery.Week> weekCommit = githubData.contributionsCollection().contributionCalendar().weeks();

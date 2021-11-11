@@ -24,7 +24,7 @@ public class TotalTopServiceImpl implements TotalTopService {
   @Transactional
   public void save() {
     totalTopRepository.save(TotalTop.builder()
-            .user(githubUserServiceImpl.githubUserListSort().get(0).getUser())
+            .user(githubUserServiceImpl.getGithubUserListSort().get(0).getUser())
             .date(new Date())
             .build());
   }
@@ -56,7 +56,7 @@ public class TotalTopServiceImpl implements TotalTopService {
   }
 
   public TotalRankRo getTotalRank() {
-    List<GithubUser> users = githubUserServiceImpl.githubUserListSort();
+    List<GithubUser> users = githubUserServiceImpl.getGithubUserListSort();
 
     return TotalRankRo.builder()
             .users(users)

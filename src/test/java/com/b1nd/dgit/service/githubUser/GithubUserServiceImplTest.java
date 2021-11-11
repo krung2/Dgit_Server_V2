@@ -51,6 +51,16 @@ class GithubUserServiceImplTest {
   }
 
   @Test
+  void githubUserList() {
+    // given
+
+    // when
+
+    // then
+
+  }
+
+  @Test
   void existUserTest_Success() {
     given(githubUserRepository.existsById(anyString()))
             .willReturn(true);

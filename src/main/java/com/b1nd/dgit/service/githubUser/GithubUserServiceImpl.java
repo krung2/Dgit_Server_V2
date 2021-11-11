@@ -60,6 +60,6 @@ public class GithubUserServiceImpl implements GithubUserService {
   }
 
   public boolean existUser(final String githubId) {
-    return githubUserRepository.findById(githubId).isPresent();
+    return githubUserRepository.existsById(githubId);
   }
 }

@@ -46,7 +46,7 @@ public class WeekServiceImpl implements WeekService {
 
     Map<GithubUser, Integer> userToCommit = new HashMap<>();
     Map<String, Integer> userIdWeekCommit = new HashMap<>();
-    githubUserService.githubUserList().forEach(githubUser -> userToCommit.put(githubUser, 0));
+    githubUserService.getGithubUserList().forEach(githubUser -> userToCommit.put(githubUser, 0));
 
     getAllData().forEach(weekContribute -> {
       if (userIdWeekCommit.containsKey(weekContribute.getGithubUser().getGithubId())) {

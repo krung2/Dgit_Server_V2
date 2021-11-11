@@ -45,12 +45,12 @@ public class GithubUserServiceImpl implements GithubUserService {
   }
 
   @Transactional(readOnly = true)
-  public List<GithubUser> githubUserListSort() {
+  public List<GithubUser> getGithubUserListSort() {
     return githubUserRepository.findEntityGraph(Sort.by(Sort.Direction.DESC, "totalContributions"));
   }
 
   @Transactional(readOnly = true)
-  public List<GithubUser> githubUserList() {
+  public List<GithubUser> getGithubUserList() {
     return githubUserRepository.findEntityGraph();
   }
 
@@ -60,6 +60,6 @@ public class GithubUserServiceImpl implements GithubUserService {
   }
 
   public boolean existUser(final String githubId) {
-    return githubUserRepository.findById(githubId).isPresent();
+    return githubUserRepository.existsById(githubId);
   }
 }

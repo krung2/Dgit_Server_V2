@@ -14,9 +14,9 @@ public interface GithubUserService {
 
   void remove(GithubUser githubUser);
 
-  List<GithubUser> githubUserListSort();
+  List<GithubUser> getGithubUserListSort();
 
-  List<GithubUser> githubUserList();
+  List<GithubUser> getGithubUserList();
 
   GithubUser findById(String githubId);
 

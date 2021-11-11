@@ -1,13 +1,18 @@
 package com.b1nd.dgit.service.githubUser;
 
+import com.b1nd.dgit.domain.entities.GithubUser;
 import com.b1nd.dgit.domain.repositories.user.GithubUserRepository;
-import com.b1nd.dgit.domain.repositories.user.UserRepository;
-import com.b1nd.dgit.service.user.UserServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
-class GithubUserServiceImplTest  {
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.BDDMockito.given;
+
+class GithubUserServiceImplTest {
 
   @Mock
   private GithubUserRepository githubUserRepository;
@@ -15,9 +20,14 @@ class GithubUserServiceImplTest  {
   @InjectMocks
   private GithubUserServiceImpl githubUserService;
 
-
   @Test
   void existUserTest() {
+    given(githubUserRepository.findById(anyString()))
+            .willReturn(Optional.of(new GithubUser()));
+
+    boolean test = githubUserService.existUser("123");
+
+    assertTrue(test);
   }
 
 }

@@ -1,0 +1,31 @@
+server:
+  port: 8080
+
+spring:
+  mvc:
+    servlet:
+      path: /api/v2
+
+  jpa:
+    show-sql: boolean
+    database: mysql
+    hibernate:
+      ddl-auto: update
+
+  datasource:
+    hikari:
+      jdbc-url: jdbc:mysql://{DB_HOST}:3306/{DB_DATABASE}_?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
+      username: DB_USER
+      password: DB_PASSWORD
+      driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
+
+app:
+  githubToken: String
+  secret: String
+  refreshSecret: String
+  clientId: String
+  clientSecret: String

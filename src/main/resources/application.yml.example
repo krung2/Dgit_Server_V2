@@ -13,11 +13,10 @@ spring:
       ddl-auto: update
 
   datasource:
-    hikari:
-      jdbc-url: jdbc:mysql://{DB_HOST}:3306/{DB_DATABASE}_?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
-      username: DB_USER
-      password: DB_PASSWORD
-      driver-class-name: com.mysql.cj.jdbc.Driver
+    jdbc-url: jdbc:mysql://{DB_HOST}:3306/{DB_DATABASE}_?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
+    username: DB_USER
+    password: DB_PASSWORD
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
   jackson:
     serialization:

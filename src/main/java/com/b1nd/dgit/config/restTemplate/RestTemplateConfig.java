@@ -8,6 +8,9 @@ import org.springframework.web.client.RestTemplate;
 
 import java.time.Duration;
 
+import static com.b1nd.dgit.enums.endpoint.DodamEndPoint.DODAM_AUTH;
+import static com.b1nd.dgit.enums.endpoint.DodamEndPoint.DODAM_OPENAPI;
+
 @Configuration
 @RequiredArgsConstructor
 public class RestTemplateConfig {
@@ -24,11 +27,11 @@ public class RestTemplateConfig {
 
   @Bean
   public RestTemplate dodamAuthTemplate() {
-    return this.restTemplate("http://dauth.b1nd.com/api");
+    return this.restTemplate(DODAM_AUTH.toString());
   }
 
   @Bean
   public RestTemplate dodamOpenTemplate() {
-    return this.restTemplate("http://open.dodam.b1nd.com/api");
+    return this.restTemplate(DODAM_OPENAPI.toString());
   }
 }

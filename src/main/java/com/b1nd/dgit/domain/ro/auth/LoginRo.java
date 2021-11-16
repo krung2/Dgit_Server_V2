@@ -19,4 +19,5 @@ public class LoginRo {
     this.token = token;
     this.refreshToken = refreshToken;
   }
+
 }

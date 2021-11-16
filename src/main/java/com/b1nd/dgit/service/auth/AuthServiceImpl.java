@@ -17,6 +17,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.constraints.NotNull;
 
@@ -56,6 +57,7 @@ public class AuthServiceImpl implements AuthService {
   }
 
   @Override
+  @Transactional
   public LoginRo dodamLogin(DodamLoginDto dodamLoginDto) {
     User user = userServiceImpl.save(getCodeToDodamInfo(dodamLoginDto.getCode()));
     return LoginRo.builder()

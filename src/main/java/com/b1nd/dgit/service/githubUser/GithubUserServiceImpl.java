@@ -21,23 +21,28 @@ public class GithubUserServiceImpl implements GithubUserService {
 
   @Transactional
   public GithubUser save(final User user, @NonNull GetContributionQuery.User githubUser) {
-    return githubUserRepository.save(GithubUser.builder()
+    return githubUserRepository.save(githubUserResponseToEntity(user, githubUser));
+  }
+
+  private GithubUser githubUserResponseToEntity(final User user, @NonNull GetContributionQuery.User githubUser) {
+    return GithubUser.builder()
             .githubId(githubUser.login())
             .user(user)
             .totalContributions(githubUser.contributionsCollection().contributionCalendar().totalContributions())
             .userImage(githubUser.avatarUrl().toString())
             .bio(githubUser.bio())
-            .build()
-    );
+            .build();
   }
 
   @Transactional
   public GithubUser update(final GithubUser userData, final GetContributionQuery.User githubUser) {
-    return githubUserRepository.save(userData.update(
-            githubUser.contributionsCollection().contributionCalendar().totalContributions(),
-            githubUser.avatarUrl().toString(),
-            githubUser.bio()
-    ));
+    return githubUserRepository.save(
+            userData.update(
+                    githubUser.contributionsCollection().contributionCalendar().totalContributions(),
+                    githubUser.avatarUrl().toString(),
+                    githubUser.bio()
+            )
+    );
   }
 
   public void remove(final GithubUser githubUser) {
@@ -56,7 +61,8 @@ public class GithubUserServiceImpl implements GithubUserService {
 
   @Transactional(readOnly = true)
   public GithubUser findById(final String githubId) {
-    return githubUserRepository.findById(githubId).orElseThrow(() -> UnauthorizedException.of("존재하지 않는 계정입니다"));
+    return githubUserRepository.findById(githubId)
+            .orElseThrow(() -> UnauthorizedException.of("존재하지 않는 계정입니다"));
   }
 
   public boolean existUser(final String githubId) {

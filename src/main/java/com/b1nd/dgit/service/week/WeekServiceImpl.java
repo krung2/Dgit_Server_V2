@@ -35,6 +35,7 @@ public class WeekServiceImpl implements WeekService {
             .build();
   }
 
+  @Transactional
   public void deleteAllData() {
     weekContributeRepository.deleteAll();
   }

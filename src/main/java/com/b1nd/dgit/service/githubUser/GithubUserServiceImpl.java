@@ -36,12 +36,10 @@ public class GithubUserServiceImpl implements GithubUserService {
 
   @Transactional
   public GithubUser update(final GithubUser userData, final GetContributionQuery.User githubUser) {
-    return githubUserRepository.save(
-            userData.update(
-                    githubUser.contributionsCollection().contributionCalendar().totalContributions(),
-                    githubUser.avatarUrl().toString(),
-                    githubUser.bio()
-            )
+    return userData.update(
+            githubUser.contributionsCollection().contributionCalendar().totalContributions(),
+            githubUser.avatarUrl().toString(),
+            githubUser.bio()
     );
   }
 

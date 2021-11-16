@@ -32,7 +32,6 @@ public class RestTemplateErrorHandler implements ResponseErrorHandler {
   }
 
   private String getErrorAsString(@NonNull final ClientHttpResponse response) throws IOException {
-
     try (
             BufferedReader bufferedReader = new BufferedReader((new InputStreamReader(response.getBody())))
     ) {

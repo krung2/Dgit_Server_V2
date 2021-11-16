@@ -23,13 +23,16 @@ public class WeekServiceImpl implements WeekService {
 
   @Transactional
   public WeekContribute save(GithubUser githubUser, GetContributionQuery.ContributionDay contributionData) {
-    return weekContributeRepository.save(WeekContribute.builder()
+    return weekContributeRepository.save(weekContributeDataToEntity(githubUser, contributionData));
+  }
+
+  private WeekContribute weekContributeDataToEntity(GithubUser githubUser, GetContributionQuery.ContributionDay contributionData) {
+    return WeekContribute.builder()
             .githubUser(githubUser)
             .contribute(contributionData.contributionCount())
             .date(contributionData.date())
             .weekDay(WeekDay.values()[contributionData.weekday()])
-            .build()
-    );
+            .build();
   }
 
   public void deleteAllData() {
@@ -46,33 +49,28 @@ public class WeekServiceImpl implements WeekService {
 
     Map<GithubUser, Integer> userToCommit = new HashMap<>();
     Map<String, Integer> userIdWeekCommit = new HashMap<>();
+
     githubUserService.getGithubUserList().forEach(githubUser -> userToCommit.put(githubUser, 0));
+    getAllData().forEach(weekContribute -> getWeeklyContribute(weekContribute, userIdWeekCommit));
 
-    getAllData().forEach(weekContribute -> {
-      if (userIdWeekCommit.containsKey(weekContribute.getGithubUser().getGithubId())) {
-        userIdWeekCommit.put(
-                weekContribute.getGithubUser().getGithubId(),
-                userIdWeekCommit.get(weekContribute.getGithubUser().getGithubId()) + weekContribute.getContribute()
-        );
-      } else {
-        userIdWeekCommit.put(
-                weekContribute.getGithubUser().getGithubId(),
-                weekContribute.getContribute()
-        );
-      }
-    });
-
-    WeeklyRankRo[] weeklyRanks = userToCommit.entrySet().stream()
-            .map(data -> {
-              if (userIdWeekCommit.containsKey(data.getKey().getGithubId())) {
-                return new WeeklyRankRo(data.getKey(), userIdWeekCommit.get(data.getKey().getGithubId()));
-              } else {
-                return new WeeklyRankRo(data.getKey(), data.getValue());
-              }
-            }).toArray(WeeklyRankRo[]::new);
-
-    return Arrays.stream(weeklyRanks)
+    return weeklyRankRos(userToCommit, userIdWeekCommit).stream()
             .sorted(Comparator.comparing(WeeklyRankRo::getWeeklyCommit).reversed())
             .collect(Collectors.toList());
+  }
+
+  private void getWeeklyContribute(WeekContribute weekContribute, Map<String, Integer> userIdWeekCommit) {
+      userIdWeekCommit.put(
+              weekContribute.getGithubUser().getGithubId(),
+              userIdWeekCommit.getOrDefault(weekContribute.getGithubUser().getGithubId(), 0) + weekContribute.getContribute()
+      );
+  }
+
+  private List<WeeklyRankRo> weeklyRankRos(Map<GithubUser, Integer> userToCommit, Map<String, Integer> userIdWeekCommit) {
+    return Arrays.asList(userToCommit.entrySet().stream()
+            .map(data -> WeeklyRankRo.of(
+                    data.getKey(),
+                    userIdWeekCommit.getOrDefault(data.getKey().getGithubId(), data.getValue())
+                    )
+            ).toArray(WeeklyRankRo[]::new));
   }
 }

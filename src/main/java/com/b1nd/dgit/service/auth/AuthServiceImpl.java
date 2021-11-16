@@ -12,11 +12,16 @@ import com.b1nd.dgit.enums.jwt.JwtAuth;
 import com.b1nd.dgit.service.token.TokenService;
 import com.b1nd.dgit.service.user.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.constraints.NotNull;
+
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
@@ -27,21 +32,9 @@ public class AuthServiceImpl implements AuthService {
   private final AppProperties appProperties;
 
   private DodamOpenApiDto getCodeToDodamInfo(final String code) {
-    System.out.println("--------dauth Server request--------");
-    DauthServerDto dauthServerDto = restTemplateConfig.dodamAuthTemplate()
-            .postForObject("/token", new HttpEntity<>(
-                    DauthRequestDto.builder()
-                            .code(code)
-                            .client_id(appProperties.getClientId())
-                            .client_secret(appProperties.getClientSecret())
-                            .build(),
-                    null
-            ), DauthServerDto.class);
-
-    System.out.println("--------dodam Server request--------");
+    log.info("--------dodam Server request--------");
     HttpHeaders headers = new HttpHeaders();
-    headers.add("authorization", "Bearer " + dauthServerDto.getAccess_token());
-
+    headers.add("authorization", "Bearer " + getDAuthToken(code).getAccess_token());
     return restTemplateConfig.dodamOpenTemplate().exchange(
             "/user",
             HttpMethod.GET,
@@ -50,7 +43,21 @@ public class AuthServiceImpl implements AuthService {
     ).getBody();
   }
 
+  private DauthServerDto getDAuthToken(@NotNull String code) {
+    log.info("--------dauth Server request--------");
+    return restTemplateConfig.dodamAuthTemplate()
+            .postForObject("/token", new HttpEntity<>(
+                    DauthRequestDto.builder()
+                            .code(code)
+                            .client_id(appProperties.getClientId())
+                            .client_secret(appProperties.getClientSecret())
+                            .build(),
+                    null
+            ), DauthServerDto.class);
+  }
+
   @Override
+  @Transactional
   public LoginRo dodamLogin(DodamLoginDto dodamLoginDto) {
     User user = userServiceImpl.save(getCodeToDodamInfo(dodamLoginDto.getCode()));
     return LoginRo.builder()

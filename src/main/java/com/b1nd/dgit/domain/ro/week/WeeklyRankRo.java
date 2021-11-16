@@ -17,4 +17,11 @@ public class WeeklyRankRo {
     this.githubUser = githubUser;
     this.weeklyCommit = weeklyCommit;
   }
+
+  public static WeeklyRankRo of(GithubUser githubUser, int weeklyCommit) {
+    return WeeklyRankRo.builder()
+            .githubUser(githubUser)
+            .weeklyCommit(weeklyCommit)
+            .build();
+  }
 }

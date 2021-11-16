@@ -29,6 +29,7 @@ public class TotalTopServiceImpl implements TotalTopService {
             .build());
   }
 
+  @Transactional(readOnly = true)
   public int getTotalTop(User githubTopUser) {
     return countTopStreak(
             githubTopUser,

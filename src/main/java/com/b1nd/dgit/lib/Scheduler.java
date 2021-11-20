@@ -59,6 +59,7 @@ public class Scheduler {
   public void weeklySchedule() {
     log.debug("-------------주간 스케쥴 시작-------------");
     weeklyTopServiceImpl.save();
+    weekServiceImpl.deleteAllData();
     log.debug("-------------주간 스케쥴 종료-------------");
   }
 }

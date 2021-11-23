@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -31,9 +32,9 @@ public class WeeklyTopServiceImpl implements WeeklyTopService {
 
   @Transactional(readOnly = true)
   public List<WeeklyTopListDto> findAllData() {
-    List<WeeklyTopListDto> weeklyTopListDtoList = new ArrayList<>();
-    weeklyTopRepository.findEntityGraph(Sort.by(Sort.Direction.DESC, "createdAt"))
-            .forEach(weeklyTop -> weeklyTopListDtoList.add(WeeklyTopListDto.of(weeklyTop)));
-    return weeklyTopListDtoList;
+    return weeklyTopRepository.findEntityGraph(Sort.by(Sort.Direction.DESC, "createdAt"))
+            .stream()
+            .map(WeeklyTopListDto::of)
+            .collect(Collectors.toList());
   }
 }

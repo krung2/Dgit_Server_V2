@@ -11,6 +11,7 @@ import com.b1nd.dgit.service.github.GithubService;
 import com.b1nd.dgit.service.githubUser.GithubUserService;
 import github.queries.GetContributionQuery;
 import lombok.RequiredArgsConstructor;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,7 +42,11 @@ public class UserServiceImpl implements UserService {
   public void modifyGithubId(User user, ModifyGithubDto modifyGithubDto) {
     if (githubUserServiceImpl.existUser(modifyGithubDto.getGithubId())) throw UnauthorizedException.of("이미 존재하는 계정입니다");
     GetContributionQuery.Data githubData = githubServiceImpl.getData(modifyGithubDto.getGithubId()).getData();
-    githubUserServiceImpl.remove(user.getGithubUser() == null ? new GithubUser() : user.getGithubUser());
+    githubUserServiceImpl.remove(getGithubUserToUser(user.getGithubUser()));
     githubUserServiceImpl.save(user, githubData.user());
+  }
+
+  private GithubUser getGithubUserToUser(@Nullable GithubUser githubUser) {
+    return githubUser == null ? new GithubUser() : githubUser;
   }
 }

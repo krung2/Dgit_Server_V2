@@ -18,11 +18,11 @@ import java.util.List;
 public class WeeklyTopServiceImpl implements WeeklyTopService {
 
   private final WeeklyTopRepository weeklyTopRepository;
-  private final WeekService weekService;
+  private final WeekService weekServiceImpl;
 
   @Transactional
   public void save() {
-    WeeklyRankRo weeklyRankRo = weekService.getWeeklyRanking().get(0);
+    WeeklyRankRo weeklyRankRo = weekServiceImpl.getWeeklyRanking().get(0);
     weeklyTopRepository.save(WeeklyTop.builder()
             .githubUser(weeklyRankRo.getGithubUser())
             .contribute(weeklyRankRo.getWeeklyCommit())

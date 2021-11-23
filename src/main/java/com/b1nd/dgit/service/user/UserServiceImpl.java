@@ -26,8 +26,9 @@ public class UserServiceImpl implements UserService {
   @Override
   @Transactional
   public User save(DodamOpenApiDto dodamOpenApiDto) {
-    DodamOpenApiDto.DodamInfoData dodamInfoData = dodamOpenApiDto.getData();
-    return userRepository.save(DodamOpenApiDto.DodamInfoData.toEntity(dodamInfoData));
+    return userRepository.save(
+            DodamOpenApiDto.DodamInfoData.toEntity(dodamOpenApiDto.getData())
+    );
   }
 
   @Override
@@ -40,10 +41,15 @@ public class UserServiceImpl implements UserService {
   @Override
   // 로직 안에서 Error를 throw하므로, @Transaction을 사용하는 것은 고려해보아야 할 것 같습니다
   public void modifyGithubId(User user, ModifyGithubDto modifyGithubDto) {
-    if (githubUserServiceImpl.existUser(modifyGithubDto.getGithubId())) throw UnauthorizedException.of("이미 존재하는 계정입니다");
+    existUser(modifyGithubDto.getGithubId());
     GetContributionQuery.Data githubData = githubServiceImpl.getData(modifyGithubDto.getGithubId()).getData();
     githubUserServiceImpl.remove(getGithubUserToUser(user.getGithubUser()));
     githubUserServiceImpl.save(user, githubData.user());
+  }
+
+  private void existUser(String githubId) {
+    if (githubUserServiceImpl.existUser(githubId))
+      throw UnauthorizedException.of("이미 존재하는 계정입니다");
   }
 
   private GithubUser getGithubUserToUser(@Nullable GithubUser githubUser) {

@@ -67,11 +67,13 @@ public class WeekServiceImpl implements WeekService {
   }
 
   private List<WeeklyRankRo> weeklyRankRos(Map<GithubUser, Integer> userToCommit, Map<String, Integer> userIdWeekCommit) {
-    return Arrays.asList(userToCommit.entrySet().stream()
-            .map(data -> WeeklyRankRo.of(
-                            data.getKey(),
-                            userIdWeekCommit.getOrDefault(data.getKey().getGithubId(), data.getValue())
-                    )
-            ).toArray(WeeklyRankRo[]::new));
+    return Arrays.asList(
+            userToCommit.entrySet().stream()
+                    .map(data -> WeeklyRankRo.of(
+                                    data.getKey(),
+                                    userIdWeekCommit.getOrDefault(data.getKey().getGithubId(), data.getValue())
+                            )
+                    ).toArray(WeeklyRankRo[]::new)
+    );
   }
 }
